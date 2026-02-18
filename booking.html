@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Booking | Sophora</title>
+  <meta name="description" content="Booking - Sophora." />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body class="booking-page">
+  <div class="container">
+    <header class="page-header artist-header booking-header">
+      <div id="booking-header-title" class="page-header-title"></div>
+    </header>
+
+    <main>
+      <p id="artist-missing" class="status hidden" data-i18n="booking_artist_missing">Artist not selected.</p>
+
+      <form class="form" onsubmit="return false;">
+        <fieldset>
+          <legend data-i18n="booking_date_label">Date options</legend>
+          <div class="date-mode-select">
+            <select id="date-mode-select" class="select-white" aria-label="Date options">
+              <option value="single" data-i18n="booking_single">Single date</option>
+              <option value="multiple" data-i18n="booking_multiple">Multiple dates</option>
+              <option value="range" data-i18n="booking_range">Date range</option>
+            </select>
+          </div>
+
+          <div class="date-fields" data-mode="single">
+            <input id="single-date" type="date" />
+          </div>
+
+          <div class="date-fields" data-mode="multiple">
+            <div id="multi-dates" class="inline-inputs">
+              <input type="date" class="multi-date" />
+            </div>
+            <div class="form-actions">
+              <button id="add-date-btn" class="btn outline" type="button" data-i18n="booking_add_date">Add date</button>
+              <button id="remove-date-btn" class="btn outline hidden" type="button" data-i18n="booking_remove_date">Delete date</button>
+            </div>
+          </div>
+
+          <div class="date-fields" data-mode="range">
+            <div class="inline-inputs">
+              <div>
+                <label data-i18n="booking_range_start_label">Start date</label>
+                <input id="range-start" type="date" />
+              </div>
+              <div>
+                <label data-i18n="booking_range_end_label">End date</label>
+                <input id="range-end" type="date" />
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="info-fieldset">
+          <legend data-i18n="booking_additional_info">Information</legend>
+          <textarea id="additional-info" data-i18n="booking_additional_placeholder" data-i18n-attr="placeholder"></textarea>
+        </fieldset>
+
+        <div class="form-actions">
+          <button id="send-email" class="btn outline" type="button" data-i18n="booking_submit">Send via Email</button>
+          <button id="send-whatsapp" class="btn outline" type="button" data-i18n="booking_whatsapp">Send via WhatsApp</button>
+        </div>
+
+        <p class="form-note" data-i18n="booking_note">This will open your email app with the details filled in.</p>
+      </form>
+    </main>
+    <div class="content-divider" aria-hidden="true"></div>
+
+    <footer class="site-footer">
+      <div class="footer-cta">
+        <div class="footer-cta-buttons">
+          <a id="booking-artist-footer" class="btn outline book-logo-btn" href="#">
+            <img src="/assets/sophora_logo.png" alt="" aria-hidden="true" />
+            <span id="booking-artist-footer-text">Artist</span>
+          </a>
+          <a id="booking-other-artists" class="btn outline book-logo-btn other-artists-btn hidden" href="/index.html">
+            <img src="/assets/sophora_logo.png" alt="" aria-hidden="true" />
+            <span data-i18n="other_artists">Other Artists</span>
+          </a>
+        </div>
+        <div class="content-divider" aria-hidden="true"></div>
+      </div>
+      <div class="footer-grid footer-grid--two">
+        <div class="footer-item footer-copyright">
+          <span class="footer-label" data-i18n="copyright_label">© 2026</span>
+          <a class="footer-value" href="index.html">sophora.cl</a>
+        </div>
+        <div class="footer-item footer-language">
+          <span class="footer-label" data-i18n="language_label">Language</span>
+          <select id="lang-select" aria-label="Language"></select>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="/i18n.js" defer></script>
+  <script src="/site.js" defer></script>
+  <script src="/booking.js" defer></script>
+</body>
+</html>

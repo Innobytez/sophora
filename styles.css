@@ -1,0 +1,837 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root{
+  --bg:#000;
+  --text:#fff;
+  --muted:#b5b5b5;
+  --border:#000;
+  --panel:#0a0a0a;
+  --accent:#fff;
+  --focus:#8ad4ff;
+}
+
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  padding:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:"Space Grotesk", sans-serif;
+}
+
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+a:hover{
+  opacity:.8;
+}
+
+.container{
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 20px 20px;
+}
+
+header.site-header{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  padding-bottom:0;
+  border-bottom:1px solid var(--border);
+  text-align:center;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.brand.center{
+  flex-direction:column;
+  gap:0;
+  --logo-width: min(90vw, 520px);
+}
+
+.brand.center img{
+  width:var(--logo-width);
+  height:auto;
+  max-width:100%;
+  display:block;
+}
+
+.brand img{
+  width:84px;
+  height:84px;
+  object-fit:contain;
+  border-radius:0;
+  background:transparent;
+  border:none;
+}
+
+.brand h1,
+.brand .site-title{
+  margin:0;
+  font-size:24px;
+  font-weight:600;
+  letter-spacing:.2px;
+}
+
+.agency-title{
+  font-family:"Cinzel", serif;
+  font-size:clamp(12px, calc(var(--logo-width) / 38), 20px);
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--text);
+  margin-top:0;
+  line-height:1;
+}
+
+.section-divider{
+  width:100%;
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+  margin:28px 0 26px;
+}
+
+.content-divider{
+  width:100%;
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+  margin:26px 0 10px;
+}
+
+.lang{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.lang label{
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:var(--muted);
+}
+
+.lang select{
+  background:var(--bg);
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:999px;
+  padding:8px 14px;
+  font-family:"Space Grotesk", sans-serif;
+}
+
+.section-title{
+  margin:0 0 16px;
+  font-size:22px;
+  font-weight:600;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:10px 16px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background:transparent;
+  color:var(--text);
+  cursor:pointer;
+  font-family:"Space Grotesk", sans-serif;
+  font-size:14px;
+}
+
+.btn:hover{
+  border-color:var(--accent);
+}
+
+.btn.primary{
+  background:var(--text);
+  color:var(--bg);
+  border-color:var(--text);
+}
+
+.btn.secondary{
+  background:var(--panel);
+}
+
+.btn.outline{
+  background:#000;
+  border:1px solid #fff;
+  color:#fff;
+  box-shadow:none;
+}
+
+.artist-list{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+}
+
+.artist-card{
+  display:flex;
+  gap:20px;
+  padding:26px 0;
+  position:relative;
+}
+
+.artist-card::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+}
+
+.artist-card img{
+  width:clamp(140px, 18vw, 170px);
+  height:clamp(100px, 12vw, 130px);
+  object-fit:cover;
+  background:#050505;
+  border:1px solid var(--border);
+  border-radius:12px;
+}
+
+.artist-card.portrait img{
+  width:clamp(110px, 15vw, 135px);
+  height:clamp(140px, 18vw, 150px);
+}
+
+.artist-link{
+  display:inline-flex;
+  align-self:flex-start;
+}
+
+.artist-name-link{
+  display:inline-flex;
+  align-items:center;
+}
+
+.artist-name-link h3{
+  margin:0;
+}
+
+.artist-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+.artist-info{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.artist-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.artist-header h3{
+  margin:0;
+  font-size:20px;
+  font-weight:600;
+}
+
+.artist-info p{
+  margin:0;
+  color:var(--muted);
+}
+
+.audio-block{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.audio-block .label{
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:var(--muted);
+}
+
+.audio-block audio{
+  width:100%;
+  display:block;
+  background:#000;
+  border:1px solid #000;
+  border-radius:10px;
+  color-scheme: dark;
+}
+
+audio{
+  width:100%;
+  display:block;
+  background:#000;
+  border:1px solid #000;
+  border-radius:10px;
+  color-scheme: dark;
+}
+
+audio::-webkit-media-controls-panel{
+  background-color:#000;
+}
+
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display{
+  color:#d0d0d0;
+}
+
+.page-header{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--border);
+}
+.page-header-title{
+  text-align:center;
+  font-size:20px;
+  font-weight:600;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.artist-header .page-header-title{
+  font-size:23px;
+  padding:0 15px;
+  min-height:56px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.booking-header{
+  justify-content:center;
+  padding-top:23px;
+}
+
+.booking-page .form{
+  align-items:center;
+}
+
+.booking-page .form > div,
+.booking-page .form fieldset{
+  width:100%;
+}
+
+.booking-page .form label,
+.booking-page .form legend{
+  text-align:center;
+}
+
+.booking-page .form input,
+.booking-page .form select{
+  text-align:center;
+  border-color:#fff;
+}
+
+.booking-page .form textarea{
+  border-color:#fff;
+  text-align:left;
+}
+
+.booking-page .form textarea::placeholder{
+  text-align:left;
+  color:var(--muted);
+}
+
+.booking-page .form textarea:placeholder-shown{
+  text-align:left;
+}
+
+.booking-page .form textarea:focus{
+  text-align:left;
+}
+
+.booking-page .form textarea:focus::placeholder{
+  color:transparent;
+}
+
+.booking-page .form fieldset{
+  border-color:#fff;
+}
+
+.booking-page .radio-row{
+  justify-content:center;
+}
+
+.booking-page .info-fieldset{
+  padding:16px;
+}
+
+.booking-page .info-fieldset textarea{
+  border:none;
+  background:transparent;
+}
+
+.booking-page .inline-inputs{
+  justify-items:center;
+}
+
+.booking-page .form-actions{
+  justify-content:center;
+}
+
+.page-title{
+  margin:26px 0 10px;
+  font-size:28px;
+  font-weight:600;
+}
+
+.page-subtitle{
+  margin:0 0 22px;
+  color:var(--muted);
+}
+
+.section{
+  margin:24px 0;
+}
+
+.section h2{
+  margin:0 0 12px;
+  font-size:20px;
+  font-weight:600;
+}
+
+.artist-hero{
+  margin:0 0 28px;
+  border-radius:16px;
+  overflow:hidden;
+  background:#050505;
+}
+
+.artist-hero img{
+  width:100%;
+  height:auto;
+  display:block;
+  object-fit:cover;
+}
+
+.tiktok-section{
+  display:flex;
+  justify-content:center;
+}
+
+.tiktok-embed-wrap{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  background:#030303;
+  border:1px solid #151515;
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 0 0 1px #0a0a0a inset;
+  color-scheme:dark;
+}
+
+.tiktok-embed-wrap blockquote,
+.tiktok-embed-wrap iframe{
+  margin:0 !important;
+  border-radius:12px;
+  background:#000;
+}
+
+.tiktok-embed-wrap iframe{
+  border:1px solid #111;
+}
+
+.video-embed{
+  width:100%;
+  max-width:540px;
+  aspect-ratio:9 / 16;
+  margin:0 auto;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  background:#000;
+}
+
+.video-embed iframe{
+  width:100%;
+  height:100%;
+  border:0;
+  display:block;
+}
+
+.media-placeholder{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:24px;
+  background:var(--panel);
+  color:var(--muted);
+  text-align:center;
+}
+
+.photo-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
+  gap:12px;
+}
+
+.photo-grid img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:#050505;
+}
+
+.photo-placeholder{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:24px;
+  background:var(--panel);
+  color:var(--muted);
+  text-align:center;
+}
+
+.form{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.form label{
+  display:block;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:var(--muted);
+  margin-bottom:6px;
+}
+
+.form input,
+.form textarea,
+.form select{
+  width:100%;
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:var(--panel);
+  color:var(--text);
+  font-family:"Space Grotesk", sans-serif;
+}
+
+.select-white{
+  background:#fff;
+  color:#000;
+  border:1px solid #fff;
+  border-radius:999px;
+  padding:10px 16px;
+  font-family:"Space Grotesk", sans-serif;
+  font-size:14px;
+  width:100%;
+}
+
+.form input[type="date"]{
+  color-scheme: dark;
+}
+
+.form input[type="date"]::-webkit-calendar-picker-indicator{
+  filter:invert(1);
+}
+
+.form textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+.form fieldset{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:16px;
+}
+
+.form legend{
+  padding:0 8px;
+  color:var(--muted);
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+}
+
+.radio-row{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+.date-fields{
+  margin-top:12px;
+  display:none;
+  gap:12px;
+  flex-direction:column;
+}
+
+.date-fields.active{
+  display:flex;
+}
+
+.inline-inputs{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+  gap:12px;
+}
+
+.form-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.form-note{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.status{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.hidden{
+  display:none !important;
+}
+
+.site-footer{
+  position:relative;
+  margin-top:12px;
+  padding-top:6px;
+}
+
+.footer-cta{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:23px;
+  margin-bottom:23px;
+}
+
+.footer-cta-buttons{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:23px;
+}
+
+.footer-cta .book-logo-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:0 15px;
+  font-size:20px;
+  font-weight:600;
+  justify-content:center;
+  height:56px;
+  overflow:hidden;
+}
+
+.book-logo-btn img{
+  width:78px;
+  height:78px;
+  object-fit:contain;
+}
+
+.footer-cta .content-divider{
+  margin:0;
+}
+
+
+.footer-grid{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  gap:16px 24px;
+  justify-items:center;
+  align-items:center;
+  text-align:center;
+}
+
+.footer-grid--two{
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+}
+
+.footer-item{
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  gap:8px;
+  font-size:14px;
+  justify-content:center;
+  color:var(--muted);
+  white-space:nowrap;
+}
+
+.footer-copyright{order:1;}
+.footer-email{order:2;}
+.footer-whatsapp{order:3;}
+.footer-language{order:4;}
+
+.footer-label{
+  color:var(--muted);
+  font-weight:500;
+}
+
+.footer-value{
+  color:var(--text);
+  text-decoration:none;
+  font-weight:500;
+}
+
+.footer-item a:hover{
+  opacity:.8;
+}
+
+.footer-item label{
+  color:var(--muted);
+  font-weight:500;
+}
+
+.footer-item select{
+  background:var(--bg);
+  color:var(--text);
+  border:none;
+  border-radius:999px;
+  padding:6px 12px;
+  font-family:\"Space Grotesk\", sans-serif;
+  font-size:14px;
+  width:auto;
+  min-width:0;
+  text-align:center;
+  text-align-last:center;
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  background-image:none;
+}
+
+.footer-item select:focus-visible{
+  outline:none;
+}
+
+html[dir="rtl"] .artist-card{
+  flex-direction:row-reverse;
+}
+
+html[dir="rtl"] .artist-header{
+  flex-direction:row-reverse;
+}
+
+html[dir="rtl"] .lang{
+  flex-direction:row-reverse;
+}
+
+:focus-visible{
+  outline:2px solid var(--focus);
+  outline-offset:2px;
+}
+
+@media (max-width:720px){
+  .brand img{width:64px;height:64px;}
+  .brand.center{
+    --logo-width: min(92vw, 360px);
+  }
+  .brand.center img{width:var(--logo-width);height:auto;}
+  .artist-card{flex-direction:column;}
+  .artist-card img{height:200px;width:auto;max-width:100%;}
+  .artist-card:not(.portrait) .artist-link{
+    align-self:center;
+    display:flex;
+    justify-content:center;
+  }
+  .artist-card.portrait{
+    flex-direction:row;
+    align-items:flex-start;
+  }
+  .artist-card.portrait img{
+    width:clamp(110px, 32vw, 140px);
+    height:clamp(150px, 45vw, 180px);
+  }
+  .artist-card.portrait .artist-header{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+  .artist-card.portrait .artist-actions{
+    justify-content:flex-start;
+  }
+  .page-header-title{text-align:center;}
+}
+
+@media (max-width:600px){
+  .booking-page .inline-inputs{
+    grid-template-columns:1fr;
+  }
+
+  .booking-page input[type="date"]{
+    width:100%;
+  }
+}
+
+@media (max-width:900px){
+  .footer-grid:not(.footer-grid--two){
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-email{order:1;}
+  .footer-whatsapp{order:2;}
+  .footer-copyright{order:3;}
+  .footer-language{order:4;}
+}
+
+@media (max-width:520px){
+  .footer-grid:not(.footer-grid--two){
+    grid-template-columns:1fr;
+  }
+
+  .footer-email{order:1;}
+  .footer-whatsapp{order:2;}
+  .footer-language{order:3;}
+  .footer-copyright{order:4;}
+
+  .footer-grid:not(.footer-grid--two) .footer-item{
+    display:grid;
+    grid-template-columns:var(--footer-label-col, 95px) var(--footer-value-col, 155px);
+    justify-content:center;
+    text-align:center;
+    white-space:normal;
+    column-gap:10px;
+    align-items:center;
+  }
+
+  .footer-grid:not(.footer-grid--two) .footer-item .footer-label,
+  .footer-grid:not(.footer-grid--two) .footer-item .footer-value,
+  .footer-grid:not(.footer-grid--two) .footer-item select{
+    justify-self:center;
+  }
+}
+
+@media (max-width:420px){
+  .page-header-title{
+    margin-top:8px;
+    text-align:center;
+  }
+}
+  html[dir="rtl"] .artist-card.portrait{
+    flex-direction:row-reverse;
+  }
