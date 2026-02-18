@@ -39,7 +39,7 @@
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)/g, "");
-    footerArtistLinkEl.href = artistName ? `/artists/${slug}/` : "/index.html";
+    footerArtistLinkEl.href = artistName ? `artists/${slug}/` : "index.html";
   }
 
   if (otherArtistsLink) {
@@ -48,7 +48,7 @@
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/(^-|-$)/g, "");
-      otherArtistsLink.href = `/index.html?pin=${slug}`;
+      otherArtistsLink.href = `index.html?pin=${slug}`;
     }
   }
 

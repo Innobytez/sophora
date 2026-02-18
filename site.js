@@ -167,7 +167,8 @@
   if (pinParam && footerHomeLink) {
     const href = footerHomeLink.getAttribute("href") || "";
     if (href.includes("index.html") && !href.includes("pin=")) {
-      footerHomeLink.href = `/index.html?pin=${encodeURIComponent(pinParam)}`;
+      const joiner = href.includes("?") ? "&" : "?";
+      footerHomeLink.setAttribute("href", `${href}${joiner}pin=${encodeURIComponent(pinParam)}`);
     }
   }
 
