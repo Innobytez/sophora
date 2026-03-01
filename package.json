@@ -1,0 +1,36 @@
+{
+  "name": "sophora-site",
+  "version": "1.0.0",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "node --test",
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "check": "node --check server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/innobytez/sophora.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/innobytez/sophora/issues"
+  },
+  "homepage": "https://github.com/innobytez/sophora#readme",
+  "description": "",
+  "dependencies": {
+    "better-sqlite3": "^12.6.2",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.2.1",
+    "helmet": "^8.1.0",
+    "multer": "^2.1.0",
+    "nodemailer": "^8.0.1",
+    "openid-client": "^6.8.2",
+    "pdfkit": "^0.17.2",
+    "zod": "^4.3.6"
+  },
+  "type": "module"
+}

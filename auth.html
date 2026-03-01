@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Artist Access | Sophora</title>
+  <link rel="icon" type="image/png" href="assets/sophora_logo_square.png" />
+  <link rel="apple-touch-icon" href="assets/sophora_logo_square.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="backend.css" />
+</head>
+<body class="backend-shell auth-page">
+  <div class="container">
+    <header class="site-header">
+      <div class="brand center">
+        <img src="assets/sophora_logo.png" alt="Sophora logo" />
+        <div class="agency-title" data-i18n="agency_title">Agencia de musica</div>
+      </div>
+    </header>
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <main>
+      <section class="backend-hero">
+        <span class="backend-kicker">Sophora</span>
+        <h1 class="backend-title" data-t="auth_title">Acceso de artistas</h1>
+        <p class="backend-subtitle" data-t="auth_subtitle">Gestiona tu pagina, calendario, contratos y materiales desde un solo lugar.</p>
+      </section>
+
+      <section class="auth-layout">
+        <section class="backend-card">
+          <div class="backend-tabs" role="tablist" aria-label="Auth tabs">
+            <button class="backend-tab active" type="button" data-panel="login" data-t="login_tab">Ingresar</button>
+            <button class="backend-tab" type="button" data-panel="signup" data-t="signup_tab">Crear cuenta</button>
+            <button class="backend-tab" type="button" data-panel="recovery" data-t="recovery_tab">Recuperar acceso</button>
+          </div>
+
+          <p id="auth-status" class="backend-status"></p>
+
+          <section id="auth-panel-login" class="backend-panel active">
+            <form id="login-form" class="backend-form-grid">
+              <div class="backend-field full">
+                <label for="login-identifier" data-t="login_identifier">Usuario o correo</label>
+                <input id="login-identifier" name="identifier" type="text" required />
+              </div>
+              <div class="backend-field full">
+                <label for="login-password" data-t="login_password">Password</label>
+                <input id="login-password" name="password" type="password" required />
+              </div>
+              <div class="backend-inline-actions full">
+                <button class="btn outline" type="submit" data-t="login_submit">Ingresar</button>
+              </div>
+            </form>
+          </section>
+
+          <section id="auth-panel-signup" class="backend-panel">
+            <form id="signup-form" class="backend-form-grid">
+              <div class="backend-field">
+                <label for="signup-username" data-t="signup_username">Nombre de usuario</label>
+                <input id="signup-username" name="username" type="text" required />
+              </div>
+              <div class="backend-field">
+                <label for="signup-email" data-t="signup_email">Correo</label>
+                <input id="signup-email" name="email" type="email" required />
+              </div>
+              <div class="backend-field">
+                <label for="signup-password" data-t="signup_password">Crear password</label>
+                <input id="signup-password" name="password" type="password" required />
+              </div>
+              <div class="backend-field full">
+                <label for="signup-password-confirm" data-t="signup_password_confirm">Confirmar password</label>
+                <input id="signup-password-confirm" name="passwordConfirm" type="password" required />
+              </div>
+              <div class="backend-inline-actions full">
+                <button class="btn outline" type="submit" data-t="signup_submit">Crear cuenta</button>
+              </div>
+            </form>
+          </section>
+
+          <section id="auth-panel-recovery" class="backend-panel">
+            <form id="recovery-form" class="backend-form-grid">
+              <div class="backend-field full">
+                <label for="recovery-email" data-t="forgot_email">Tu correo</label>
+                <input id="recovery-email" name="email" type="email" required />
+              </div>
+              <div class="backend-inline-actions full">
+                <button class="btn outline" type="submit" data-t="forgot_submit">Enviar recordatorio</button>
+              </div>
+            </form>
+          </section>
+
+          <div class="content-divider" aria-hidden="true"></div>
+          <p class="backend-hint" data-t="oauth_login">Entrar con</p>
+          <div class="backend-inline-actions">
+            <a class="btn outline" href="/api/auth/oauth/google/start?mode=login"><span data-t="auth_google">Google</span></a>
+            <a class="btn outline" href="/api/auth/oauth/apple/start?mode=login"><span data-t="auth_apple">Apple</span></a>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-item footer-copyright">
+          <span class="footer-label">© 2026</span>
+          <a class="footer-value" href="index.html">sophora.cl</a>
+        </div>
+        <div class="footer-item footer-email">
+          <span class="footer-label">Mail</span>
+          <a class="footer-value" id="footer-email-link" href="#"></a>
+        </div>
+        <div class="footer-item footer-whatsapp">
+          <span class="footer-label">Whatsapp</span>
+          <a class="footer-value" id="footer-whatsapp-link" href="#"></a>
+        </div>
+        <div class="footer-item footer-language">
+          <span class="footer-label">Language</span>
+          <select id="lang-select" aria-label="Language"></select>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="i18n.js" defer></script>
+  <script src="site.js" defer></script>
+  <script src="backend-common.js" defer></script>
+  <script src="auth.js" defer></script>
+</body>
+</html>

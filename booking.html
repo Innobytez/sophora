@@ -13,6 +13,7 @@
   <meta name="twitter:title" content="Booking | Sophora" />
   <meta name="twitter:image" content="https://innobytez.github.io/sophora/assets/sophora_logo_square.png" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="backend.css" />
 </head>
 <body class="booking-page">
   <div class="container">
@@ -25,6 +26,38 @@
 
       <form class="form" onsubmit="return false;">
         <fieldset>
+          <legend data-i18n="booking_contact_heading">Your details</legend>
+          <div class="backend-form-grid">
+            <div class="backend-field">
+              <label for="client-name" data-i18n="booking_client_name">Name</label>
+              <input id="client-name" type="text" data-i18n="booking_client_name_placeholder" data-i18n-attr="placeholder" />
+            </div>
+            <div class="backend-field">
+              <label for="client-email" data-i18n="booking_client_email">Email</label>
+              <input id="client-email" type="email" data-i18n="booking_client_email_placeholder" data-i18n-attr="placeholder" />
+            </div>
+            <div class="backend-field full">
+              <label for="client-phone" data-i18n="booking_client_phone">Phone / WhatsApp</label>
+              <input id="client-phone" type="text" data-i18n="booking_client_phone_placeholder" data-i18n-attr="placeholder" />
+            </div>
+            <div class="backend-field full">
+              <label data-i18n="booking_notify_heading">How should we notify you?</label>
+              <div class="backend-checks booking-notify-options">
+                <div class="backend-check">
+                  <input id="notify-by-email" type="checkbox" />
+                  <label for="notify-by-email" data-i18n="booking_notify_email">Email</label>
+                </div>
+                <div class="backend-check">
+                  <input id="notify-by-sms" type="checkbox" />
+                  <label for="notify-by-sms" data-i18n="booking_notify_sms">WhatsApp</label>
+                </div>
+              </div>
+              <p id="booking-notify-hint" class="backend-hint booking-notify-hint hidden" data-i18n="booking_notify_hint">Choose at least one notification method.</p>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
           <legend data-i18n="booking_date_label">Date options</legend>
           <div class="date-mode-select">
             <select id="date-mode-select" class="select-white" aria-label="Date options">
@@ -33,31 +66,52 @@
               <option value="range" data-i18n="booking_range">Date range</option>
             </select>
           </div>
-
-          <div class="date-fields" data-mode="single">
-            <input id="single-date" type="date" />
-          </div>
-
-          <div class="date-fields" data-mode="multiple">
-            <div id="multi-dates" class="inline-inputs">
-              <input type="date" class="multi-date" />
+          <div class="booking-calendar-panel">
+            <p id="booking-calendar-note" class="backend-hint"></p>
+            <div class="backend-toolbar">
+              <button id="booking-calendar-prev" class="btn outline" type="button" data-t="previous_month">Mes anterior</button>
+              <strong id="booking-calendar-month-label"></strong>
+              <button id="booking-calendar-next" class="btn outline" type="button" data-t="next_month">Mes siguiente</button>
             </div>
-            <div class="form-actions">
-              <button id="add-date-btn" class="btn outline" type="button" data-i18n="booking_add_date">Add date</button>
-              <button id="remove-date-btn" class="btn outline hidden" type="button" data-i18n="booking_remove_date">Delete date</button>
+            <div id="booking-calendar-grid" class="calendar-grid"></div>
+            <div class="backend-inline-actions">
+              <button id="booking-clear-selection" class="btn outline" type="button" data-t="booking_clear_selection">Limpiar seleccion</button>
             </div>
           </div>
+        </fieldset>
 
-          <div class="date-fields" data-mode="range">
-            <div class="inline-inputs">
-              <div>
-                <label data-i18n="booking_range_start_label">Start date</label>
-                <input id="range-start" type="date" />
+        <fieldset>
+          <legend data-i18n="booking_optional_heading">Optional details</legend>
+          <div class="backend-form-grid">
+            <div class="backend-field">
+              <label for="engagement-start-time-display" data-i18n="booking_engagement_start_time">Engagement start time</label>
+              <div class="time-field-combo" data-booking-time-field="engagementStartTime">
+                <input id="engagement-start-time-display" type="text" inputmode="numeric" placeholder="07:00" aria-label="Start time" />
+                <select id="engagement-start-time-meridiem" aria-label="Start time meridiem">
+                  <option value="AM">AM</option>
+                  <option value="PM" selected>PM</option>
+                </select>
+                <input id="engagement-start-time" type="hidden" />
               </div>
-              <div>
-                <label data-i18n="booking_range_end_label">End date</label>
-                <input id="range-end" type="date" />
+            </div>
+            <div class="backend-field">
+              <label for="engagement-end-time-display" data-i18n="booking_engagement_end_time">Estimated engagement end time</label>
+              <div class="time-field-combo" data-booking-time-field="engagementEndTime">
+                <input id="engagement-end-time-display" type="text" inputmode="numeric" placeholder="10:00" aria-label="End time" />
+                <select id="engagement-end-time-meridiem" aria-label="End time meridiem">
+                  <option value="AM">AM</option>
+                  <option value="PM" selected>PM</option>
+                </select>
+                <input id="engagement-end-time" type="hidden" />
               </div>
+            </div>
+            <div class="backend-field full booking-location-field">
+              <label for="booking-location" data-i18n="booking_location">Location</label>
+              <input id="booking-location" type="text" data-i18n="booking_location_placeholder" data-i18n-attr="placeholder" />
+            </div>
+            <div class="backend-field full booking-budget-field">
+              <label for="suggested-budget" data-i18n="booking_suggested_budget">Suggested budget</label>
+              <input id="suggested-budget" type="text" inputmode="numeric" pattern="[0-9]*" data-i18n="booking_suggested_budget_placeholder" data-i18n-attr="placeholder" />
             </div>
           </div>
         </fieldset>
@@ -67,12 +121,13 @@
           <textarea id="additional-info" data-i18n="booking_additional_placeholder" data-i18n-attr="placeholder"></textarea>
         </fieldset>
 
+        <p id="booking-request-status" class="status hidden"></p>
+
         <div class="form-actions">
-          <button id="send-email" class="btn outline" type="button" data-i18n="booking_submit">Send via Email</button>
-          <button id="send-whatsapp" class="btn outline" type="button" data-i18n="booking_whatsapp">Send via WhatsApp</button>
+          <button id="booking-submit-request" class="btn outline" type="button" data-i18n="booking_submit_request">Send booking request</button>
         </div>
 
-        <p class="form-note" data-i18n="booking_note">This will open your email app with the details filled in.</p>
+        <p class="form-note" data-i18n="booking_note_request">Sophora will save your request and send it to the admin dashboard.</p>
       </form>
     </main>
     <div class="content-divider" aria-hidden="true"></div>
@@ -84,9 +139,9 @@
             <img src="assets/sophora_logo.png" alt="" aria-hidden="true" />
             <span id="booking-artist-footer-text">Artist</span>
           </a>
-          <a id="booking-other-artists" class="btn outline book-logo-btn other-artists-btn hidden" href="index.html">
+          <a id="booking-other-artists" class="btn outline book-logo-btn other-artists-btn" href="artists.html">
             <img src="assets/sophora_logo.png" alt="" aria-hidden="true" />
-            <span data-i18n="other_artists">Other Artists</span>
+            <span data-i18n="other_artists">Artist List</span>
           </a>
         </div>
         <div class="content-divider" aria-hidden="true"></div>
@@ -101,11 +156,15 @@
           <select id="lang-select" aria-label="Language"></select>
         </div>
       </div>
+      <div class="footer-access">
+        <a class="btn outline footer-access-btn" href="/auth.html" data-i18n="artist_access">Artist Access</a>
+      </div>
     </footer>
   </div>
 
   <script src="i18n.js" defer></script>
   <script src="site.js" defer></script>
+  <script src="backend-common.js" defer></script>
   <script src="booking.js" defer></script>
 </body>
 </html>

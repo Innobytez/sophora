@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Artists | Sophora</title>
+  <meta name="description" content="Browse the Sophora artist roster." />
+  <link rel="icon" type="image/png" href="assets/sophora_logo_square.png" />
+  <link rel="apple-touch-icon" href="assets/sophora_logo_square.png" />
+  <meta property="og:title" content="Artists | Sophora" />
+  <meta property="og:description" content="Browse the Sophora artist roster." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://innobytez.github.io/sophora/assets/sophora_logo_square.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Artists | Sophora" />
+  <meta name="twitter:description" content="Browse the Sophora artist roster." />
+  <meta name="twitter:image" content="https://innobytez.github.io/sophora/assets/sophora_logo_square.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="backend.css" />
+</head>
+<body class="artists-page">
+  <div class="container">
+    <header class="site-header">
+      <div class="brand center">
+        <img src="assets/sophora_logo.png" alt="Sophora logo" />
+        <div class="agency-title" data-i18n="agency_title">Music Agency</div>
+      </div>
+    </header>
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <main>
+      <section class="directory-intro">
+        <h1 class="section-title" data-i18n="artists_page_title">Artist List</h1>
+        <p class="page-subtitle" data-i18n="artists_page_body">Explore the current Sophora artists, open their public pages, or go straight to booking.</p>
+      </section>
+
+      <section>
+        <div class="artist-list">
+          <p class="backend-status active">Loading...</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-item footer-copyright">
+          <span class="footer-label" data-i18n="copyright_label">© 2026</span>
+          <a class="footer-value" href="index.html">sophora.cl</a>
+        </div>
+        <div class="footer-item footer-email">
+          <span class="footer-label" data-i18n="email_label">Mail</span>
+          <a class="footer-value" id="footer-email-link" href="#"></a>
+        </div>
+        <div class="footer-item footer-whatsapp">
+          <span class="footer-label" data-i18n="whatsapp_label">Whatsapp</span>
+          <a class="footer-value" id="footer-whatsapp-link" href="#"></a>
+        </div>
+        <div class="footer-item footer-language">
+          <span class="footer-label" data-i18n="language_label">Language</span>
+          <select id="lang-select" aria-label="Language"></select>
+        </div>
+      </div>
+      <div class="footer-access">
+        <a class="btn outline footer-access-btn" href="/auth.html" data-i18n="artist_access">Artist Access</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="i18n.js" defer></script>
+  <script src="site.js" defer></script>
+  <script src="backend-common.js" defer></script>
+  <script src="artists-feed.js" defer></script>
+</body>
+</html>
