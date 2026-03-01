@@ -15,8 +15,6 @@
   const RTL_LANGS = new Set(["ar", "ur"]);
   const STORAGE_LANG = "sophora_lang";
   const STORAGE_ARTIST = "sophora_artist";
-  const INSTAGRAM_URL = "https://www.instagram.com/sophora.cl/";
-  const FACEBOOK_URL = "https://www.facebook.com/sophora.cl/";
 
   const langSelect = document.getElementById("lang-select");
   const urlParams = new URLSearchParams(window.location.search);
@@ -76,7 +74,8 @@
       const key = el.getAttribute("data-i18n");
       const value = dict[key] || fallback[key];
       if (!value) return;
-      if (el.hasAttribute("data-i18n-attr")) {
+      const tag = el.tagName;
+      if ((tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") && el.hasAttribute("data-i18n-attr")) {
         return;
       }
       el.textContent = value;
@@ -105,9 +104,6 @@
     }
 
     sizeFooterLangSelects();
-    window.dispatchEvent(new CustomEvent("sophora:language-change", {
-      detail: { lang: activeLang }
-    }));
   }
 
   const storedLang = localStorage.getItem(STORAGE_LANG);
@@ -115,17 +111,17 @@
   setLanguage(initialLang);
 
   const HOME_SESSION_KEY = "sophora_home_entry";
-  const isArtistDirectory = document.body.classList.contains("artists-page") || !!document.querySelector(".artist-list");
+  const isHomepage = !!document.querySelector(".artist-list");
 
   if (!sessionStorage.getItem(HOME_SESSION_KEY)) {
-    const isUnpinnedDirectory = isArtistDirectory && !pinParam;
-    sessionStorage.setItem(HOME_SESSION_KEY, isUnpinnedDirectory ? "artists" : "other");
+    const isUnpinnedHome = isHomepage && !pinParam;
+    sessionStorage.setItem(HOME_SESSION_KEY, isUnpinnedHome ? "home" : "other");
   }
 
   const otherArtistsBtn = document.querySelector(".other-artists-btn");
   if (otherArtistsBtn) {
     const entry = sessionStorage.getItem(HOME_SESSION_KEY);
-    if (entry === "artists") {
+    if (entry === "home") {
       otherArtistsBtn.classList.remove("hidden");
     }
   }
@@ -144,6 +140,7 @@
   const footerEmailLink = document.getElementById("footer-email-link");
   const footerWhatsappLink = document.getElementById("footer-whatsapp-link");
   const footerYear = document.getElementById("footer-year");
+  const footerHomeLink = document.querySelector(".footer-copyright .footer-value");
 
   const emailUser = String.fromCharCode(105, 110, 102, 111);
   const emailDomain = ["sophora", "cl"].join(".");
@@ -152,82 +149,6 @@
   const phone = phoneParts.join("");
   const phoneDisplay = "+56 9 7143 9032";
   const whatsappNumber = phone.replace("+", "");
-
-  function getTranslation(key, fallback = key) {
-    const lang = document.documentElement.lang || "en";
-    const dict = (window.I18N && window.I18N[lang]) || (window.I18N && window.I18N.en) || {};
-    return dict[key] || fallback;
-  }
-
-  function iconSvg(kind) {
-    if (kind === "email") {
-      return `
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M3 6.5h18v11H3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-          <path d="m4.2 7.5 7.8 6 7.8-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      `;
-    }
-    if (kind === "whatsapp") {
-      return `
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M12 3.5a8.5 8.5 0 0 0-7.4 12.7L3.5 20.5l4.5-1.1A8.5 8.5 0 1 0 12 3.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-          <path d="M9.2 8.8c.2-.4.4-.4.7-.4h.5c.2 0 .4 0 .5.4l.6 1.5c.1.2 0 .4-.1.5l-.4.5c-.1.1-.1.3 0 .4.3.6 1 1.4 1.9 1.8.1.1.3 0 .4-.1l.5-.6c.1-.1.3-.2.5-.1l1.4.7c.2.1.3.3.2.5l-.2.7c-.1.3-.4.5-.7.6-.5.1-1.3.1-2.7-.6-1.9-1-3.3-3.1-3.5-4.8-.1-.5 0-1 .4-1.5Z" fill="currentColor"/>
-        </svg>
-      `;
-    }
-    if (kind === "instagram") {
-      return `
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <rect x="4.1" y="4.1" width="15.8" height="15.8" rx="4.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
-          <circle cx="12" cy="12" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
-          <circle cx="17.3" cy="6.8" r="1" fill="currentColor"/>
-        </svg>
-      `;
-    }
-    return `
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M13.4 20v-7h2.3l.4-2.8h-2.7V8.4c0-.8.2-1.4 1.4-1.4H16V4.5c-.4-.1-1.2-.2-2.2-.2-2.2 0-3.6 1.3-3.6 3.8v2.1H8v2.8h2.2v7h3.2Z" fill="currentColor"/>
-      </svg>
-    `;
-  }
-
-  function ensureFooterSocials() {
-    document.querySelectorAll(".site-footer").forEach((footer) => {
-      if (footer.querySelector(".footer-socials")) return;
-      footer.querySelector(".footer-email")?.remove();
-      footer.querySelector(".footer-whatsapp")?.remove();
-      footer.querySelector(".footer-grid")?.classList.add("footer-grid--two");
-      const socialWrap = document.createElement("div");
-      socialWrap.className = "footer-socials";
-      socialWrap.innerHTML = `
-        <div class="footer-social-group">
-          <span class="footer-socials-title" data-i18n="contact_label">Contact us</span>
-          <div class="footer-socials-list">
-            <a class="footer-social-btn" href="mailto:${email}" data-i18n="email_label" data-i18n-attr="aria-label" aria-label="${getTranslation("email_label", "Mail")}">
-              ${iconSvg("email")}
-            </a>
-            <a class="footer-social-btn" href="https://wa.me/${whatsappNumber}" target="_blank" rel="noreferrer" data-i18n="whatsapp_label" data-i18n-attr="aria-label" aria-label="${getTranslation("whatsapp_label", "WhatsApp")}">
-              ${iconSvg("whatsapp")}
-            </a>
-          </div>
-        </div>
-        <div class="footer-social-group">
-          <span class="footer-socials-title" data-i18n="follow_label">Follow us</span>
-          <div class="footer-socials-list">
-            <a class="footer-social-btn" href="${INSTAGRAM_URL}" target="_blank" rel="noreferrer" data-i18n="instagram_label" data-i18n-attr="aria-label" aria-label="${getTranslation("instagram_label", "Instagram")}">
-              ${iconSvg("instagram")}
-            </a>
-            <a class="footer-social-btn" href="${FACEBOOK_URL}" target="_blank" rel="noreferrer" data-i18n="facebook_label" data-i18n-attr="aria-label" aria-label="${getTranslation("facebook_label", "Facebook")}">
-              ${iconSvg("facebook")}
-            </a>
-          </div>
-        </div>
-      `;
-      footer.insertBefore(socialWrap, footer.querySelector(".footer-grid"));
-      applyTranslations(document.documentElement.lang || "en");
-    });
-  }
 
   if (footerEmailLink) {
     footerEmailLink.textContent = email;
@@ -239,10 +160,16 @@
     footerWhatsappLink.href = `https://wa.me/${whatsappNumber}`;
   }
 
-  ensureFooterSocials();
-
   if (footerYear) {
     footerYear.textContent = new Date().getFullYear();
+  }
+
+  if (pinParam && footerHomeLink) {
+    const href = footerHomeLink.getAttribute("href") || "";
+    if (href.includes("index.html") && !href.includes("pin=")) {
+      const joiner = href.includes("?") ? "&" : "?";
+      footerHomeLink.setAttribute("href", `${href}${joiner}pin=${encodeURIComponent(pinParam)}`);
+    }
   }
 
   if (emailBtn) {
@@ -265,27 +192,6 @@
   });
 
   const artistImages = document.querySelectorAll(".artist-card img");
-  const footerAccessLinks = document.querySelectorAll(".footer-access-btn");
-
-  if (footerAccessLinks.length) {
-    fetch("/api/auth/me", {
-      credentials: "same-origin",
-      headers: {
-        Accept: "application/json"
-      }
-    })
-      .then((response) => (response.ok ? response.json() : null))
-      .then((payload) => {
-        if (!payload?.user) return;
-        footerAccessLinks.forEach((link) => {
-          link.setAttribute("href", "/dashboard.html");
-        });
-      })
-      .catch(() => {
-        // Public pages should stay usable even if auth bootstrap fails.
-      });
-  }
-
   const setOrientation = (img) => {
     const card = img.closest(".artist-card");
     if (!card) return;
