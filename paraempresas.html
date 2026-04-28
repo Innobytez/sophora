@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Para empresas | Sophora</title>
+  <meta name="description" content="Programacion musical para empresas con experiencias en vivo, continuidad y artistas profesionales." />
+  <link rel="icon" type="image/png" href="assets/sophora_logo_square.png" />
+  <link rel="apple-touch-icon" href="assets/sophora_logo_square.png" />
+  <link rel="stylesheet" href="home-web.css" />
+</head>
+<body class="paraempresas-body">
+  <main class="web-home paraempresas-page" aria-label="Para empresas">
+    <section class="home-band para-top-band" aria-label="Propuesta para empresas">
+      <div class="home-band-inner home-hero-grid">
+        <div class="brand-lockup">
+          <img src="assets/sophora_logo.png" alt="Sophora" />
+          <address id="contact" class="contact-card contact-card-inline" aria-label="Contactar a Sophora">
+            <a class="contact-action" href="mailto:info@sophora.cl" aria-label="Enviar correo a info@sophora.cl">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 6.5h16v11H4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                <path d="m5.4 7.6 6.6 5.2 6.6-5.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>info@sophora.cl</span>
+            </a>
+            <a class="contact-action" href="#" aria-label="Enviar WhatsApp a Sophora" data-whatsapp-contact>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3.8a8.2 8.2 0 0 0-7 12.5L4 20.2l4.1-1A8.2 8.2 0 1 0 12 3.8Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                <path d="M9.2 8.7c.2-.3.4-.4.7-.4h.5c.2 0 .4.1.5.4l.5 1.4c.1.2 0 .4-.1.5l-.4.5c-.1.1-.1.3 0 .4.3.6.9 1.3 1.7 1.8.2.1.3.1.5-.1l.5-.5c.1-.2.3-.2.5-.1l1.3.6c.3.1.4.3.3.6l-.2.6c-.1.3-.4.5-.7.6-.5.1-1.3.1-2.5-.5-1.8-.9-3.1-2.9-3.3-4.4-.1-.6 0-1.1.3-1.5Z" fill="currentColor"/>
+              </svg>
+              <span data-whatsapp-label>WhatsApp</span>
+            </a>
+            <a class="contact-action" href="/" aria-label="Volver al inicio">&lt;Volver al inicio</a>
+          </address>
+          <div class="brand-copy">
+            <p>Diseñamos formatos musicales adaptables a tu empresa. Gestionamos tus eventos y coordinamos tu programación musical continua ejecutadas por artistas profesionales. Ofrecemos dos tipos principales de servicios para empresas: programación continua y experiencias de identidad.</p>
+          </div>
+        </div>
+
+        <a class="gallery-card catalog-gallery-card" href="/catalogodeartistas" aria-label="Ver catalogo de artistas">
+          <img id="para-gallery-image" src="assets/artist-placeholder.svg" alt="" />
+          <span class="catalog-gallery-overlay">
+            <span class="catalog-gallery-title">Catalogo de Artistas</span>
+            <span class="catalog-gallery-button">Explorar</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <section class="home-band para-services-band" aria-label="Servicios para empresas">
+      <div class="home-band-inner para-services-inner">
+        <div class="para-service-grid">
+          <article class="para-service-card">
+            <h3>Programación continua</h3>
+            <p>Música en vivo pensada para acompañar el ambiente y mejorar la experiencia del cliente de forma recurrente.</p>
+          </article>
+          <article class="para-service-card">
+            <h3>Experiencias de identidad</h3>
+            <p>Shows con mayor desarrollo artístico, diseñados para generar impacto y diferenciación.</p>
+          </article>
+        </div>
+        <aside class="benefits-card" aria-label="Beneficios para empresas">
+          <ul class="benefits-list">
+            <li>
+              <span class="benefit-icon" aria-hidden="true">👥</span>
+              <span>Mejora la experiencia del cliente</span>
+            </li>
+            <li>
+              <span class="benefit-icon" aria-hidden="true">💰</span>
+              <span>Aumenta la permanencia y fideliza</span>
+            </li>
+            <li>
+              <span class="benefit-icon" aria-hidden="true">⭐</span>
+              <span>Diferencia tu propuesta frente a la competencia</span>
+            </li>
+            <li>
+              <span class="benefit-icon" aria-hidden="true">🚫</span>
+              <span>Reduce la incertidumbre en la contratación</span>
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const whatsappContact = document.querySelector("[data-whatsapp-contact]");
+      const whatsappLabel = document.querySelector("[data-whatsapp-label]");
+      if (!whatsappContact) return;
+
+      const display = "+56 9 2047 4645";
+      const waNumber = "56920474645";
+      whatsappContact.href = `https://wa.me/${waNumber}`;
+      whatsappContact.target = "_blank";
+      whatsappContact.rel = "noreferrer";
+      whatsappContact.setAttribute("aria-label", `Enviar WhatsApp a ${display}`);
+      if (whatsappLabel) whatsappLabel.textContent = display;
+
+      const galleryItems = [
+        "artists/carmeners/assets/the-carmeners-jpg.webp",
+        "artists/carmeners/assets/the-carmeners-logo.jpeg",
+        "artists/alexander-roberts/assets/alexander-roberts-casual-headshot.jpg",
+        "assets/artist-placeholder.svg"
+      ];
+
+      const galleryImage = document.getElementById("para-gallery-image");
+      if (galleryImage && galleryItems.length) {
+        const desktopQuery = window.matchMedia("(min-width: 761px)");
+        let activeGalleryIndex = 0;
+
+        function sizeGalleryImage() {
+          if (!galleryImage.complete || !galleryImage.naturalWidth || !galleryImage.naturalHeight) return;
+          const frame = galleryImage.closest(".gallery-card");
+          if (!frame) return;
+
+          const slot = frame.parentElement?.getBoundingClientRect();
+          const maxWidth = Math.min(slot?.width || 560, 560);
+          const minHeight = desktopQuery.matches ? 220 : 210;
+          const preferredHeight = window.innerHeight * (desktopQuery.matches ? 0.31 : 0.42);
+          const maxHeight = Math.max(minHeight, Math.min(preferredHeight, desktopQuery.matches ? 300 : 280));
+          const imageRatio = galleryImage.naturalWidth / galleryImage.naturalHeight;
+          const maxRatio = maxWidth / maxHeight;
+
+          let frameWidth = maxWidth;
+          let frameHeight = maxWidth / imageRatio;
+
+          if (imageRatio < maxRatio) {
+            frameHeight = maxHeight;
+            frameWidth = maxHeight * imageRatio;
+          }
+
+          frame.style.width = `${Math.round(frameWidth)}px`;
+          frame.style.height = `${Math.round(frameHeight)}px`;
+        }
+
+        function showGalleryItem(index) {
+          galleryImage.src = galleryItems[index];
+        }
+
+        galleryImage.addEventListener("load", sizeGalleryImage);
+        window.addEventListener("resize", sizeGalleryImage);
+        desktopQuery.addEventListener?.("change", sizeGalleryImage);
+        showGalleryItem(activeGalleryIndex);
+
+        window.setInterval(() => {
+          activeGalleryIndex = (activeGalleryIndex + 1) % galleryItems.length;
+          showGalleryItem(activeGalleryIndex);
+        }, 3000);
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -98,13 +98,6 @@
         setAuthStatus(error.message, "error");
       }
     });
-
-    const oauthMessage = B.getQueryParam("oauth");
-    if (oauthMessage === "not-linked") {
-      setAuthStatus("Esa cuenta social aun no esta vinculada a un artista.", "error");
-    } else if (oauthMessage === "logged-in") {
-      setAuthStatus("Ingreso realizado correctamente.", "success");
-    }
   }
 
   async function initResetPage() {

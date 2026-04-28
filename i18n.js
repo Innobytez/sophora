@@ -1,6 +1,6 @@
 const I18N = {
   en: {
-    agency_title: "MUSIC AGENCY",
+    agency_title: "Agencia de programacion en vivo",
     language_label: "Language",
     artist_access: "Artist Access",
     book_now: "Book Now",
@@ -69,9 +69,9 @@ const I18N = {
     copyright_label: "© 2026",
   },
   es: {
-    agency_title: "AGENCIA DE MUSICA",
+    agency_title: "Agencia de programacion en vivo",
     language_label: "Idioma",
-    artist_access: "Artist Access",
+    artist_access: "Acceso de artistas",
     book_now: "Reservar ahora",
     other_artists: "Lista de artistas",
     view_artist: "Ver artista",
@@ -138,7 +138,7 @@ const I18N = {
     copyright_label: "© 2026",
   },
   zh: {
-    agency_title: "音乐机构",
+    agency_title: "Agencia de programacion en vivo",
     language_label: "语言",
     book_now: "立即预订",
     other_artists: "艺人列表",
@@ -174,7 +174,7 @@ const I18N = {
     copyright_label: "© 2026",
   },
   hi: {
-    agency_title: "संगीत एजेंसी",
+    agency_title: "Agencia de programacion en vivo",
     language_label: "भाषा",
     book_now: "अभी बुक करें",
     other_artists: "कलाकार सूची",
@@ -210,7 +210,7 @@ const I18N = {
     copyright_label: "© 2026",
   },
   fr: {
-    agency_title: "AGENCE MUSICALE",
+    agency_title: "Agencia de programacion en vivo",
     language_label: "Langue",
     book_now: "Réserver",
     other_artists: "Liste des artistes",
@@ -246,7 +246,7 @@ const I18N = {
     copyright_label: "© 2026",
   },
   ar: {
-    agency_title: "وكالة موسيقية",
+    agency_title: "Agencia de programacion en vivo",
     language_label: "اللغة",
     book_now: "احجز الآن",
     other_artists: "قائمة الفنانين",
@@ -282,7 +282,7 @@ const I18N = {
     copyright_label: "© 2026",
   },
   bn: {
-    agency_title: "মিউজিক এজেন্সি",
+    agency_title: "Agencia de programacion en vivo",
     language_label: "ভাষা",
     book_now: "এখনই বুক করুন",
     other_artists: "শিল্পীদের তালিকা",
@@ -318,7 +318,7 @@ const I18N = {
     copyright_label: "© 2026",
   },
   pt: {
-    agency_title: "AGÊNCIA MUSICAL",
+    agency_title: "Agencia de programacion en vivo",
     language_label: "Idioma",
     book_now: "Reservar agora",
     other_artists: "Lista de artistas",
@@ -354,7 +354,7 @@ const I18N = {
     copyright_label: "© 2026",
   },
   ru: {
-    agency_title: "МУЗЫКАЛЬНОЕ АГЕНТСТВО",
+    agency_title: "Agencia de programacion en vivo",
     language_label: "Язык",
     book_now: "Забронировать",
     other_artists: "Список артистов",
@@ -390,7 +390,7 @@ const I18N = {
     copyright_label: "© 2026",
   },
   ur: {
-    agency_title: "میوزک ایجنسی",
+    agency_title: "Agencia de programacion en vivo",
     language_label: "زبان",
     book_now: "ابھی بک کریں",
     other_artists: "فنکاروں کی فہرست",

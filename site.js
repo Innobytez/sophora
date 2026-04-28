@@ -139,18 +139,21 @@
   window.addEventListener("resize", sizeFooterLangSelects);
 
 
+  function fromCodes(codes) {
+    return String.fromCharCode(...codes);
+  }
+
   const emailBtn = document.getElementById("email-btn");
   const callBtn = document.getElementById("call-btn");
   const footerEmailLink = document.getElementById("footer-email-link");
   const footerWhatsappLink = document.getElementById("footer-whatsapp-link");
   const footerYear = document.getElementById("footer-year");
 
-  const emailUser = String.fromCharCode(105, 110, 102, 111);
-  const emailDomain = ["sophora", "cl"].join(".");
+  const emailUser = "support";
+  const emailDomain = ["innobytez", "com"].join(".");
   const email = `${emailUser}@${emailDomain}`;
-  const phoneParts = ["+56", "9", "7143", "9032"];
-  const phone = phoneParts.join("");
-  const phoneDisplay = "+56 9 7143 9032";
+  const phone = fromCodes([43, 53, 54, 57, 55, 49, 52, 51, 57, 48, 51, 50]);
+  const phoneDisplay = fromCodes([43, 53, 54, 32, 57, 32, 55, 49, 52, 51, 32, 57, 48, 51, 50]);
   const whatsappNumber = phone.replace("+", "");
 
   function getTranslation(key, fallback = key) {

@@ -90,10 +90,14 @@
     dom.slugInput = document.getElementById("slug-input");
     dom.slugPreviewLink = document.getElementById("slug-preview-link");
     dom.audioHiddenInput = document.getElementById("audio-preview-input");
-    dom.audioSourceInput = document.getElementById("audio-source-input");
+    dom.audioAddLinkBtn = document.getElementById("audio-add-link-btn");
     dom.audioUploadBtn = document.getElementById("audio-upload-btn");
     dom.audioClearBtn = document.getElementById("audio-clear-btn");
     dom.audioPreviewSlot = document.getElementById("audio-preview-slot");
+    dom.technicalRiderInput = document.getElementById("technical-rider-input");
+    dom.technicalRiderAddLinkBtn = document.getElementById("technical-rider-add-link-btn");
+    dom.technicalRiderClearBtn = document.getElementById("technical-rider-clear-btn");
+    dom.technicalRiderPreviewSlot = document.getElementById("technical-rider-preview-slot");
     dom.videoUrlsInput = document.getElementById("video-urls-input");
     dom.photoUrlsInput = document.getElementById("photo-urls-input");
     dom.videoMediaList = document.getElementById("video-media-list");
@@ -125,7 +129,6 @@
     dom.accountAttachUsernameInput = document.getElementById("account-attach-username");
     dom.accountAttachPasswordInput = document.getElementById("account-attach-password");
     dom.accountDeleteArtist = document.getElementById("account-delete-artist-btn");
-    dom.accountOauthWrap = document.getElementById("account-oauth-wrap");
     dom.calendarBody = document.getElementById("calendar-card-body");
     dom.calendarToggle = document.getElementById("calendar-toggle-btn");
     dom.calendarStatus = document.getElementById("calendar-status");
@@ -591,6 +594,40 @@
     return "";
   }
 
+  function getMediaSourceLabel(url) {
+    const text = String(url || "").trim();
+    if (!text) return "";
+    try {
+      const parsed = new URL(text, window.location.origin);
+      const pathname = decodeURIComponent(parsed.pathname || "");
+      const leaf = pathname.split("/").filter(Boolean).pop() || "";
+      if (parsed.origin === window.location.origin && leaf) {
+        return leaf;
+      }
+      return parsed.hostname.replace(/^www\./i, "") || leaf || text;
+    } catch {
+      return text.split("/").filter(Boolean).pop() || text;
+    }
+  }
+
+  function renderDashboardDocumentPreview(url) {
+    const safeUrl = B.escapeHtml(url || "");
+    if (!safeUrl) return "";
+    return `
+      <div class="backend-media-document">
+        <strong>${B.escapeHtml(getMediaSourceLabel(url))}</strong>
+        <a class="btn outline" href="${safeUrl}" target="_blank" rel="noreferrer">${B.escapeHtml(B.t("open_media_link"))}</a>
+      </div>
+    `;
+  }
+
+  function promptMediaLink(initialValue = "") {
+    const response = window.prompt(B.t("media_source_placeholder"), initialValue);
+    if (typeof response !== "string") return null;
+    const trimmed = response.trim();
+    return trimmed || null;
+  }
+
   function getProfileMediaHiddenInput(kind) {
     if (kind === "video") return dom.videoUrlsInput;
     if (kind === "photo") return dom.photoUrlsInput;
@@ -604,7 +641,36 @@
     return null;
   }
 
-  function buildProfileMediaItemHtml(kind, url = "") {
+  function getProfileMediaUrls(kind) {
+    const input = getProfileMediaHiddenInput(kind);
+    if (!input) return [];
+    return normalizeProfileMediaUrls(B.linesToList(input.value));
+  }
+
+  function writeProfileMediaUrls(kind, urls, options = {}) {
+    const input = getProfileMediaHiddenInput(kind);
+    if (!input) return [];
+
+    const normalized = normalizeProfileMediaUrls(urls);
+    input.value = normalized.join("\n");
+    if (kind === "photo") {
+      ensureProfilePhotoSelections();
+    }
+    if (kind === "video" && normalized.length) {
+      document.getElementById("section-videos-input").checked = true;
+    }
+    if (kind === "photo" && normalized.length) {
+      document.getElementById("section-photos-input").checked = true;
+    }
+    renderProfileMediaList(kind);
+    if (!options.skipDraftSync) {
+      state.profileStatusOverride = null;
+      syncProfileDraftState();
+    }
+    return normalized;
+  }
+
+  function buildProfileMediaItemHtml(kind, url = "", index = 0) {
     const trimmed = String(url || "").trim();
     const previewHtml = renderDashboardMediaPreview(kind, trimmed);
     const uploadLabel = kind === "video" ? B.t("upload_video") : B.t("upload_image");
@@ -612,23 +678,20 @@
     const cardSelected = kind === "photo" && trimmed && trimmed === document.getElementById("card-image-input")?.value;
     const heroSelected = kind === "photo" && trimmed && trimmed === document.getElementById("hero-image-input")?.value;
     return `
-      <div class="backend-media-item" data-media-item="${kind}">
+      <div class="backend-media-item" data-media-item="${kind}" data-media-url="${B.escapeHtml(trimmed)}" data-media-index="${index}">
         <div class="backend-media-item-preview ${previewHtml ? "" : "is-empty"}" data-media-preview>
           ${previewHtml || `<span class="backend-hint">${B.escapeHtml(B.t(emptyTextKey))}</span>`}
         </div>
         <div class="backend-media-item-controls">
-          <input
-            type="text"
-            value="${B.escapeHtml(trimmed)}"
-            data-media-url-input="${kind}"
-            placeholder="${B.escapeHtml(B.t("media_source_placeholder"))}" />
+          <div class="backend-media-item-meta">${B.escapeHtml(getMediaSourceLabel(trimmed))}</div>
           <div class="backend-inline-actions">
             ${kind === "photo" ? `
               <button class="btn outline ${cardSelected ? "is-active" : ""}" type="button" data-media-role="card" data-media-role-url="${B.escapeHtml(trimmed)}" ${trimmed ? "" : "disabled"}>${B.escapeHtml(B.t("card_image"))}</button>
               <button class="btn outline ${heroSelected ? "is-active" : ""}" type="button" data-media-role="hero" data-media-role-url="${B.escapeHtml(trimmed)}" ${trimmed ? "" : "disabled"}>${B.escapeHtml(B.t("hero_image"))}</button>
             ` : ""}
+            <button class="btn outline" type="button" data-media-link="${kind}" data-media-index="${index}">${B.escapeHtml(B.t("replace_link"))}</button>
             <button class="btn outline" type="button" data-media-upload="${kind}">${B.escapeHtml(uploadLabel)}</button>
-            <button class="btn outline" type="button" data-media-remove="${kind}">${B.escapeHtml(B.t("remove_media"))}</button>
+            <button class="btn outline" type="button" data-media-remove="${kind}" data-media-index="${index}">${B.escapeHtml(B.t("remove_media"))}</button>
           </div>
         </div>
       </div>
@@ -637,83 +700,64 @@
 
   function renderProfileMediaList(kind) {
     const list = getProfileMediaListElement(kind);
-    const input = getProfileMediaHiddenInput(kind);
-    if (!list || !input) return;
-    const urls = normalizeProfileMediaUrls(B.linesToList(input.value));
+    if (!list) return;
+    const urls = getProfileMediaUrls(kind);
     if (kind === "photo") {
       ensureProfilePhotoSelections();
     }
     list.innerHTML = urls.length
-      ? urls.map((url) => buildProfileMediaItemHtml(kind, url)).join("")
+      ? urls.map((url, index) => buildProfileMediaItemHtml(kind, url, index)).join("")
       : `<div class="backend-media-empty">${B.escapeHtml(B.t(kind === "video" ? "video_media_empty" : "photo_media_empty"))}</div>`;
   }
 
   function renderAudioMediaField() {
-    if (!dom.audioSourceInput || !dom.audioHiddenInput || !dom.audioPreviewSlot || !dom.audioClearBtn) return;
+    if (!dom.audioHiddenInput || !dom.audioPreviewSlot || !dom.audioClearBtn) return;
     const url = String(dom.audioHiddenInput.value || "").trim();
-    dom.audioSourceInput.value = url;
     const previewHtml = renderDashboardMediaPreview("audio", url);
-    dom.audioPreviewSlot.innerHTML = previewHtml;
-    dom.audioPreviewSlot.classList.toggle("hidden", !previewHtml);
+    dom.audioPreviewSlot.innerHTML = previewHtml || `<div class="backend-media-preview-empty"><span class="backend-hint">${B.escapeHtml(B.t("audio_media_empty"))}</span></div>`;
+    dom.audioPreviewSlot.classList.toggle("is-empty", !previewHtml);
     dom.audioClearBtn.classList.toggle("hidden", !url);
+  }
+
+  function renderTechnicalRiderField() {
+    if (!dom.technicalRiderInput || !dom.technicalRiderPreviewSlot || !dom.technicalRiderClearBtn) return;
+    const url = String(dom.technicalRiderInput.value || "").trim();
+    const previewHtml = renderDashboardDocumentPreview(url);
+    dom.technicalRiderPreviewSlot.innerHTML = previewHtml || `<div class="backend-media-preview-empty"><span class="backend-hint">${B.escapeHtml(B.t("technical_rider_empty"))}</span></div>`;
+    dom.technicalRiderPreviewSlot.classList.toggle("is-empty", !previewHtml);
+    dom.technicalRiderClearBtn.classList.toggle("hidden", !url);
   }
 
   function renderProfileMediaManagers() {
     renderAudioMediaField();
+    renderTechnicalRiderField();
     renderProfileMediaList("video");
     renderProfileMediaList("photo");
   }
 
-  function syncAudioMediaField(options = {}) {
-    if (!dom.audioHiddenInput || !dom.audioSourceInput) return;
-    dom.audioHiddenInput.value = String(dom.audioSourceInput.value || "").trim();
-    if (dom.audioHiddenInput.value) {
-      document.getElementById("section-audio-input").checked = true;
+  function setSingleProfileMediaValue(input, value, sectionInputId) {
+    if (!input) return;
+    input.value = String(value || "").trim();
+    if (input.value && sectionInputId) {
+      document.getElementById(sectionInputId).checked = true;
     }
-    if (!options.skipRender) {
-      renderAudioMediaField();
-    }
-    if (!options.skipDraftSync) {
-      state.profileStatusOverride = null;
-      syncProfileDraftState();
-    }
+    state.profileStatusOverride = null;
+    syncProfileDraftState();
+    renderProfileMediaManagers();
   }
 
-  function syncProfileMediaUrls(kind, options = {}) {
-    const input = getProfileMediaHiddenInput(kind);
-    const list = getProfileMediaListElement(kind);
-    if (!input) return [];
-
-    const urls = list
-      ? normalizeProfileMediaUrls(
-          [...list.querySelectorAll(`[data-media-url-input="${kind}"]`)].map((field) => field.value)
-        )
-      : normalizeProfileMediaUrls([input.value]);
-
-    input.value = urls.join("\n");
-    if (kind === "photo") {
-      ensureProfilePhotoSelections();
-    }
-    if (kind === "video" && urls.length) {
-      document.getElementById("section-videos-input").checked = true;
-    }
-    if (kind === "photo" && urls.length) {
-      document.getElementById("section-photos-input").checked = true;
-    }
-    if (!options.skipDraftSync) {
-      state.profileStatusOverride = null;
-      syncProfileDraftState();
-    }
-    return urls;
+  function addProfileMediaLink(kind) {
+    const url = promptMediaLink();
+    if (!url) return;
+    writeProfileMediaUrls(kind, [...getProfileMediaUrls(kind), url]);
   }
 
-  function appendBlankProfileMediaItem(kind) {
-    const list = getProfileMediaListElement(kind);
-    if (!list) return;
-    const empty = list.querySelector(".backend-media-empty");
-    if (empty) list.innerHTML = "";
-    list.insertAdjacentHTML("beforeend", buildProfileMediaItemHtml(kind, ""));
-    list.querySelector(`[data-media-item="${kind}"]:last-child [data-media-url-input="${kind}"]`)?.focus();
+  function replaceProfileMediaLink(kind, index, currentUrl) {
+    const url = promptMediaLink(currentUrl);
+    if (!url) return;
+    const urls = getProfileMediaUrls(kind);
+    urls[index] = url;
+    writeProfileMediaUrls(kind, urls);
   }
 
   async function uploadDashboardFile(kind, file) {
@@ -2269,20 +2313,6 @@
     renderAccountStatus();
   }
 
-  function renderProviderStatus() {
-    const linked = new Set(B.state.user?.linkedProviders || []);
-    for (const provider of ["google", "apple"]) {
-      const pill = document.getElementById(`provider-${provider}-state`);
-      const link = document.getElementById(`provider-${provider}-link`);
-      if (!pill || !link) continue;
-      const isLinked = linked.has(provider);
-      pill.className = `backend-pill ${isLinked ? "success" : ""}`;
-      pill.textContent = isLinked ? B.t("oauth_linked") : B.t("oauth_not_linked");
-      link.textContent = isLinked ? B.t("oauth_linked") : B.t("link_provider");
-      link.classList.toggle("hidden", isLinked);
-    }
-  }
-
   function renderAccountSettings() {
     const artist = currentArtist();
     const account = currentAccountSubject();
@@ -2329,12 +2359,6 @@
     if (dom.accountPhoneInput) dom.accountPhoneInput.value = account.contactPhone || "";
     dom.accountEmailStatus.className = `backend-pill ${account.emailVerifiedAt ? "success" : ""}`;
     dom.accountEmailStatus.textContent = account.emailVerifiedAt ? B.t("email_verified") : B.t("email_unverified");
-
-    const showOauth = !isAdmin();
-    dom.accountOauthWrap?.classList.toggle("hidden", !showOauth);
-    if (showOauth) {
-      renderProviderStatus();
-    }
 
     state.accountPublishedState = buildPublishedAccountState();
     const draft = loadStoredAccountDraft(artist.id);
@@ -4004,6 +4028,7 @@
         syncEventCreateDraftState();
         renderTimelineStatus();
       } else {
+        renderProfileMediaManagers();
         state.profileStatusOverride = null;
         syncProfileDraftState();
       }
@@ -4764,50 +4789,47 @@
       renderProfilePageModeState();
     });
 
-    dom.audioSourceInput?.addEventListener("input", () => {
-      syncAudioMediaField({ skipRender: true });
-    });
-
-    dom.audioSourceInput?.addEventListener("change", () => {
-      syncAudioMediaField();
+    dom.audioAddLinkBtn?.addEventListener("click", () => {
+      const url = promptMediaLink(dom.audioHiddenInput?.value || "");
+      if (!url) return;
+      setSingleProfileMediaValue(dom.audioHiddenInput, url, "section-audio-input");
     });
 
     dom.audioUploadBtn?.addEventListener("click", () => {
       promptMediaUpload("audio", {
         onComplete: (uploadedUrls) => {
-          dom.audioHiddenInput.value = uploadedUrls[0] || "";
-          renderAudioMediaField();
-          state.profileStatusOverride = null;
-          syncProfileDraftState();
+          setSingleProfileMediaValue(dom.audioHiddenInput, uploadedUrls[0] || "", "section-audio-input");
         }
       });
     });
 
     dom.audioClearBtn?.addEventListener("click", () => {
-      dom.audioHiddenInput.value = "";
-      renderAudioMediaField();
-      state.profileStatusOverride = null;
-      syncProfileDraftState();
+      setSingleProfileMediaValue(dom.audioHiddenInput, "", null);
+    });
+
+    dom.technicalRiderAddLinkBtn?.addEventListener("click", () => {
+      const url = promptMediaLink(dom.technicalRiderInput?.value || "");
+      if (!url) return;
+      setSingleProfileMediaValue(dom.technicalRiderInput, url, "section-rider-input");
+    });
+
+    dom.technicalRiderClearBtn?.addEventListener("click", () => {
+      setSingleProfileMediaValue(dom.technicalRiderInput, "", null);
     });
 
     dom.videoAddLinkBtn?.addEventListener("click", () => {
-      appendBlankProfileMediaItem("video");
+      addProfileMediaLink("video");
     });
 
     dom.photoAddLinkBtn?.addEventListener("click", () => {
-      appendBlankProfileMediaItem("photo");
+      addProfileMediaLink("photo");
     });
 
     dom.videoUploadBtn?.addEventListener("click", () => {
       promptMediaUpload("video", {
         multiple: true,
         onComplete: (uploadedUrls) => {
-          const existing = normalizeProfileMediaUrls(B.linesToList(dom.videoUrlsInput?.value || ""));
-          dom.videoUrlsInput.value = normalizeProfileMediaUrls([...existing, ...uploadedUrls]).join("\n");
-          renderProfileMediaList("video");
-          document.getElementById("section-videos-input").checked = true;
-          state.profileStatusOverride = null;
-          syncProfileDraftState();
+          writeProfileMediaUrls("video", [...getProfileMediaUrls("video"), ...uploadedUrls]);
         }
       });
     });
@@ -4816,30 +4838,12 @@
       promptMediaUpload("photo", {
         multiple: true,
         onComplete: (uploadedUrls) => {
-          const existing = normalizeProfileMediaUrls(B.linesToList(dom.photoUrlsInput?.value || ""));
-          dom.photoUrlsInput.value = normalizeProfileMediaUrls([...existing, ...uploadedUrls]).join("\n");
-          renderProfileMediaList("photo");
-          document.getElementById("section-photos-input").checked = true;
-          state.profileStatusOverride = null;
-          syncProfileDraftState();
+          writeProfileMediaUrls("photo", [...getProfileMediaUrls("photo"), ...uploadedUrls]);
         }
       });
     });
 
     [dom.videoMediaList, dom.photoMediaList].forEach((list) => {
-      list?.addEventListener("input", (event) => {
-        const input = event.target.closest("[data-media-url-input]");
-        if (!input) return;
-        syncProfileMediaUrls(input.dataset.mediaUrlInput, { skipDraftSync: false });
-      });
-
-      list?.addEventListener("change", (event) => {
-        const input = event.target.closest("[data-media-url-input]");
-        if (!input) return;
-        syncProfileMediaUrls(input.dataset.mediaUrlInput, { skipDraftSync: false });
-        renderProfileMediaList(input.dataset.mediaUrlInput);
-      });
-
       list?.addEventListener("click", (event) => {
         const roleButton = event.target.closest("[data-media-role]");
         if (roleButton) {
@@ -4853,24 +4857,38 @@
         if (uploadButton) {
           const kind = uploadButton.dataset.mediaUpload;
           const item = uploadButton.closest("[data-media-item]");
-          const urlInput = item?.querySelector(`[data-media-url-input="${kind}"]`);
+          const index = Number.parseInt(item?.dataset.mediaIndex || "-1", 10);
           promptMediaUpload(kind, {
             onComplete: (uploadedUrls) => {
-              if (!urlInput) return;
-              urlInput.value = uploadedUrls[0] || "";
-              syncProfileMediaUrls(kind, { skipDraftSync: false });
-              renderProfileMediaList(kind);
+              if (index < 0) return;
+              const urls = getProfileMediaUrls(kind);
+              urls[index] = uploadedUrls[0] || "";
+              writeProfileMediaUrls(kind, urls);
             }
           });
+          return;
+        }
+
+        const linkButton = event.target.closest("[data-media-link]");
+        if (linkButton) {
+          const kind = linkButton.dataset.mediaLink;
+          const index = Number.parseInt(linkButton.dataset.mediaIndex || "-1", 10);
+          const item = linkButton.closest("[data-media-item]");
+          const currentUrl = item?.dataset.mediaUrl || "";
+          if (index >= 0) {
+            replaceProfileMediaLink(kind, index, currentUrl);
+          }
           return;
         }
 
         const removeButton = event.target.closest("[data-media-remove]");
         if (removeButton) {
           const kind = removeButton.dataset.mediaRemove;
-          removeButton.closest("[data-media-item]")?.remove();
-          syncProfileMediaUrls(kind, { skipDraftSync: false });
-          renderProfileMediaList(kind);
+          const index = Number.parseInt(removeButton.dataset.mediaIndex || "-1", 10);
+          if (index < 0) return;
+          const urls = getProfileMediaUrls(kind);
+          urls.splice(index, 1);
+          writeProfileMediaUrls(kind, urls);
         }
       });
     });
@@ -5151,10 +5169,6 @@
     try {
       await loadDashboard(initialArtistId);
       maybeShowTour();
-      const oauthStatus = B.getQueryParam("oauth");
-      if (oauthStatus === "linked") {
-        B.setStatus(dom.settingsStatus, B.t("saved"), "success");
-      }
     } catch (error) {
       state.profileStatusOverride = { message: error.message, tone: "error" };
       renderProfileStatus();

@@ -1,4 +1,4 @@
-import fs from "node:fs/promises";
+import fs from "node:fs";
 import path from "node:path";
 
 import express from "express";
@@ -12,6 +12,13 @@ import { config } from "./config.js";
 import { db, initializeDatabase, nowIso, parseJson, serializeJson } from "./database.js";
 import { sendEmail } from "./email.js";
 import { buildArtistContractPdf, buildClientQuotePdf } from "./pdf.js";
+import {
+  checkStorageHealth,
+  deleteUploadByPublicPath,
+  ensureStorageReady,
+  putArtistUpload,
+  streamUploadToResponse
+} from "./storage.js";
 import {
   createPasswordLengthEnvelope,
   createRandomToken,
@@ -58,6 +65,9 @@ const optionalIntegerSchema = z.preprocess((value) => {
 
 const PUBLIC_ROOT_FILES = [
   "index.html",
+  "paraempresas.html",
+  "catalogodeartistas.html",
+  "artist-catalog-page.html",
   "artists.html",
   "booking.html",
   "auth.html",
@@ -73,11 +83,32 @@ const PUBLIC_ROOT_FILES = [
   "backend-common.js",
   "artists-feed.js",
   "home.js",
+  "home-web.css",
+  "home-web.js",
+  "artist-catalog.css",
+  "artist-catalog-data.js",
+  "artist-catalog.js",
   "artist-page.js",
   "auth.js",
   "admin.js",
   "dashboard.js"
 ];
+
+const CATALOG_ARTIST_SLUGS = new Set([
+  "gusto-completo",
+  "carmeners",
+  "alexander-roberts",
+  "gabriela-caceres",
+  "la-sociedad-chilena-del-jass",
+  "mirza-y-erick",
+  "the-hot-cats-big-band",
+  "trio-mena-corral"
+]);
+
+function hasStaticCatalogArtist(slug) {
+  return CATALOG_ARTIST_SLUGS.has(slug) &&
+    fs.existsSync(path.join(config.rootDir, "artists", slug, "assets"));
+}
 
 const signUpSchema = z.object({
   username: z.string().trim().min(3).max(48),
@@ -1290,32 +1321,20 @@ function buildBookingRequestForwardMessage(artist, bookingRequest) {
   ].filter(Boolean).join("\n");
 }
 
-function uploadPublicPathToFilePath(publicPath) {
-  if (!publicPath || !String(publicPath).startsWith("/uploads/")) return null;
-  return path.join(config.rootDir, String(publicPath).replace(/^\//, ""));
-}
-
 async function removeGeneratedUpload(publicPath) {
-  const filePath = uploadPublicPathToFilePath(publicPath);
-  if (!filePath) return;
-  try {
-    await fs.unlink(filePath);
-  } catch (error) {
-    if (error?.code !== "ENOENT") {
-      throw error;
-    }
-  }
+  await deleteUploadByPublicPath(publicPath);
 }
 
 async function writeGeneratedEventPdf(artist, event, { buffer, suffix, originalName }) {
-  const artistDir = path.join(config.uploadsDir, artist.slug);
-  await fs.mkdir(artistDir, { recursive: true });
   const fileName = `gig-${event.id}-${suffix}-${Date.now()}.pdf`;
-  const filePath = path.join(artistDir, fileName);
-  await fs.writeFile(filePath, buffer);
+  const uploaded = await putArtistUpload({
+    artistSlug: artist.slug,
+    fileName,
+    buffer,
+    contentType: "application/pdf"
+  });
   return {
-    filePath,
-    publicPath: `/uploads/${artist.slug}/${fileName}`,
+    publicPath: uploaded.publicPath,
     originalName
   };
 }
@@ -1574,6 +1593,22 @@ app.use((req, res, next) => {
   }
 
   next();
+});
+
+app.get("/api/healthz", (req, res, next) => {
+  Promise.resolve()
+    .then(() => db.prepare("SELECT 1 AS ok").get())
+    .then(() => checkStorageHealth())
+    .then((storage) => {
+      res.json({
+        status: "ok",
+        time: nowIso(),
+        appUrl: config.appUrl,
+        db: config.dbClient,
+        storage
+      });
+    })
+    .catch(next);
 });
 
 app.get("/api/auth/me", (req, res) => {
@@ -2936,16 +2971,19 @@ app.post(
     );
     const safeBaseName = slugify(path.basename(req.file.originalname || kind, ext)) || kind;
     const fileName = `${kind}-${Date.now()}-${safeBaseName}${ext}`;
-    const artistDir = path.join(config.uploadsDir, artist.slug);
-    await fs.mkdir(artistDir, { recursive: true });
-    await fs.writeFile(path.join(artistDir, fileName), req.file.buffer);
+    const uploaded = await putArtistUpload({
+      artistSlug: artist.slug,
+      fileName,
+      buffer: req.file.buffer,
+      contentType: req.file.mimetype
+    });
 
     res.json({
       ok: true,
       file: {
         name: req.file.originalname,
         kind,
-        url: `/uploads/${artist.slug}/${fileName}`
+        url: uploaded.publicPath
       }
     });
   })
@@ -3237,6 +3275,10 @@ app.delete("/api/admin/artists/:id", requireAuth, requireAdmin, (req, res) => {
 });
 
 app.get("/artists/:slug/", (req, res, next) => {
+  if (hasStaticCatalogArtist(req.params.slug)) {
+    return res.sendFile(path.join(config.rootDir, "artist-catalog-page.html"));
+  }
+
   const artist = findArtistBySlug(req.params.slug, { includeHidden: false });
   if (!artist) return next();
   if (artist.pageMode === "booking_only" || !artist.hasPublicContent) {
@@ -3247,6 +3289,10 @@ app.get("/artists/:slug/", (req, res, next) => {
 
 app.get("/artists/:slug", (req, res, next) => {
   if (req.path.endsWith("/")) return next();
+  if (hasStaticCatalogArtist(req.params.slug)) {
+    return res.sendFile(path.join(config.rootDir, "artist-catalog-page.html"));
+  }
+
   const artist = findArtistBySlug(req.params.slug, { includeHidden: false });
   if (!artist) return next();
   if (artist.pageMode === "booking_only" || !artist.hasPublicContent) {
@@ -3259,9 +3305,40 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(config.rootDir, "index.html"));
 });
 
+app.get("/paraempresas", (req, res) => {
+  res.redirect(301, "/convenioempresas");
+});
+
+app.get("/paraempresas/", (req, res) => {
+  res.redirect(301, "/convenioempresas");
+});
+
+app.get("/convenioempresas", (req, res) => {
+  res.sendFile(path.join(config.rootDir, "paraempresas.html"));
+});
+
+app.get("/convenioempresas/", (req, res) => {
+  res.sendFile(path.join(config.rootDir, "paraempresas.html"));
+});
+
+app.get("/catalogodeartistas", (req, res) => {
+  res.sendFile(path.join(config.rootDir, "catalogodeartistas.html"));
+});
+
+app.get("/catalogodeartistas/", (req, res) => {
+  res.sendFile(path.join(config.rootDir, "catalogodeartistas.html"));
+});
+
 app.use("/assets", express.static(path.join(config.rootDir, "assets"), { index: false }));
 app.use("/artists", express.static(path.join(config.rootDir, "artists"), { index: false }));
-app.use("/uploads", express.static(config.uploadsDir, { index: false }));
+app.get(/^\/uploads\/(.+)$/, safeAsync(async (req, res, next) => {
+  const publicPath = req.path;
+  const streamed = await streamUploadToResponse(publicPath, res);
+  if (streamed === false) return next();
+  if (typeof streamed === "string") {
+    return res.sendFile(streamed);
+  }
+}));
 
 for (const fileName of PUBLIC_ROOT_FILES) {
   app.get(`/${fileName}`, (req, res) => {
@@ -3287,6 +3364,7 @@ app.use((error, req, res, next) => {
 });
 
 await initializeDatabase();
+await ensureStorageReady();
 
 app.listen(config.port, () => {
   console.log(`[sophora] Backend listening on ${config.appUrl}`);

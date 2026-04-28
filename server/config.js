@@ -27,6 +27,34 @@ function readNumber(value, fallback) {
 const port = readNumber(process.env.PORT, 3000);
 const appUrl = (process.env.APP_URL || `http://localhost:${port}`).replace(/\/$/, "");
 const isProduction = process.env.NODE_ENV === "production";
+const dbClient = String(process.env.DB_CLIENT || (process.env.DATABASE_URL ? "postgres" : "sqlite")).trim().toLowerCase();
+const storageDriver = String(process.env.STORAGE_DRIVER || "local").trim().toLowerCase();
+
+if (!["sqlite", "postgres"].includes(dbClient)) {
+  throw new Error(`Unsupported DB_CLIENT "${dbClient}". Use "sqlite" or "postgres".`);
+}
+
+if (dbClient === "postgres" && !String(process.env.DATABASE_URL || "").trim()) {
+  throw new Error("DATABASE_URL is required when DB_CLIENT=postgres.");
+}
+
+if (!["local", "s3"].includes(storageDriver)) {
+  throw new Error(`Unsupported STORAGE_DRIVER "${storageDriver}". Use "local" or "s3".`);
+}
+
+if (storageDriver === "s3") {
+  const missingStorageVars = [
+    ["S3_BUCKET", process.env.S3_BUCKET],
+    ["S3_REGION", process.env.S3_REGION],
+    ["S3_ENDPOINT", process.env.S3_ENDPOINT],
+    ["S3_ACCESS_KEY_ID", process.env.S3_ACCESS_KEY_ID],
+    ["S3_SECRET_ACCESS_KEY", process.env.S3_SECRET_ACCESS_KEY]
+  ].filter(([, value]) => !String(value || "").trim()).map(([key]) => key);
+
+  if (missingStorageVars.length) {
+    throw new Error(`Missing required S3 configuration: ${missingStorageVars.join(", ")}.`);
+  }
+}
 
 export const config = {
   rootDir,
@@ -34,6 +62,8 @@ export const config = {
   uploadsDir,
   emailOutboxDir,
   dbPath: path.join(dataDir, "sophora.sqlite"),
+  dbClient,
+  databaseUrl: process.env.DATABASE_URL || "",
   port,
   appUrl,
   isProduction,
@@ -47,7 +77,7 @@ export const config = {
     secure: readBoolean(process.env.SMTP_SECURE, false),
     user: process.env.SMTP_USER || "",
     pass: process.env.SMTP_PASS || "",
-    from: process.env.SMTP_FROM || "Sophora <no-reply@sophora.cl>"
+    from: process.env.SMTP_FROM || "Sophora <no-reply@innobytez.com>"
   },
   adminSeed: {
     email: process.env.ADMIN_EMAIL || "",
@@ -67,5 +97,14 @@ export const config = {
       issuer: "https://appleid.apple.com",
       scope: "openid email name"
     }
+  },
+  storage: {
+    driver: storageDriver,
+    bucket: process.env.S3_BUCKET || "sophora-local",
+    region: process.env.S3_REGION || "us-east-1",
+    endpoint: process.env.S3_ENDPOINT || "",
+    accessKeyId: process.env.S3_ACCESS_KEY_ID || "",
+    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || "",
+    forcePathStyle: readBoolean(process.env.S3_FORCE_PATH_STYLE, true)
   }
 };

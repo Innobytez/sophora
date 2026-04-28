@@ -1,13 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root{
-  --bg:#0e0e0e;
-  --text:#f6f5f2;
-  --muted:#bcb7ae;
-  --border:rgba(246,245,242,0.12);
-  --panel:#15231c;
-  --panel-strong:#1f3d2b;
-  --panel-soft:rgba(31,61,43,0.24);
+  --bg:#f7f1df;
+  --text:#000000;
+  --muted:rgba(0,0,0,.68);
+  --border:rgba(16,45,32,0.14);
+  --panel:#fffaf0;
+  --panel-strong:#e9dfc5;
+  --panel-soft:rgba(16,45,32,0.07);
   --accent:#b66a4a;
   --accent-soft:rgba(182,106,74,0.14);
   --focus:#b66a4a;
@@ -19,40 +19,28 @@
 html,body{
   margin:0;
   padding:0;
-  background:
-    radial-gradient(circle at 8% 0%, rgba(31,61,43,0.54), transparent 36%),
-    radial-gradient(circle at 92% 2%, rgba(182,106,74,0.32), transparent 34%),
-    radial-gradient(circle at 82% 72%, rgba(182,106,74,0.18), transparent 42%),
-    radial-gradient(circle at 16% 84%, rgba(31,61,43,0.3), transparent 38%),
-    radial-gradient(circle at 40% 100%, rgba(31,61,43,0.14), transparent 28%),
-    linear-gradient(145deg, rgba(182,106,74,0.08), rgba(14,14,14,0) 52%),
-    var(--bg);
+  background:var(--bg);
   color:var(--text);
   font-family:"Inter", sans-serif;
   line-height:1.6;
+}
+
+body{
+  position:relative;
+  isolation:isolate;
 }
 
 body.home-page,
 body.artists-page,
 body.artist-page-shell,
 body.booking-page{
-  --public-surface:rgba(14,14,14,0.92);
-  --public-surface-soft:rgba(14,14,14,0.84);
-  --public-surface-hover:rgba(18,18,18,0.98);
+  --public-surface:rgba(255,250,240,0.94);
+  --public-surface-soft:rgba(255,250,240,0.86);
+  --public-surface-hover:#fffaf0;
   position:relative;
   min-height:100vh;
   isolation:isolate;
-  background:
-    radial-gradient(circle at 0% 2%, rgba(31,61,43,0.72), transparent 36%),
-    radial-gradient(circle at 30% 18%, rgba(31,61,43,0.24), transparent 28%),
-    radial-gradient(circle at 100% 4%, rgba(182,106,74,0.4), transparent 30%),
-    radial-gradient(circle at 78% 30%, rgba(182,106,74,0.18), transparent 34%),
-    radial-gradient(circle at 16% 76%, rgba(31,61,43,0.5), transparent 36%),
-    radial-gradient(circle at 42% 102%, rgba(31,61,43,0.28), transparent 34%),
-    radial-gradient(circle at 88% 84%, rgba(182,106,74,0.22), transparent 34%),
-    linear-gradient(155deg, rgba(182,106,74,0.1), rgba(14,14,14,0) 46%),
-    linear-gradient(180deg, rgba(31,61,43,0.22), rgba(14,14,14,0.02) 38%, rgba(31,61,43,0.18) 100%),
-    var(--bg);
+  background:var(--bg);
   background-attachment:fixed;
 }
 
@@ -64,7 +52,7 @@ body.home-page::after,
 body.artists-page::after,
 body.artist-page-shell::after,
 body.booking-page::after{
-  content:"";
+  content:none;
   position:fixed;
   pointer-events:none;
   z-index:0;
@@ -160,13 +148,15 @@ header.site-header{
 }
 
 .agency-title{
-  font-family:"Cinzel", serif;
+  font-family:"Inter", sans-serif;
   font-size:clamp(12px, calc(var(--logo-width) / 38), 20px);
-  letter-spacing:.32em;
+  font-weight:700;
+  letter-spacing:.18em;
   text-transform:uppercase;
   color:var(--text);
   margin-top:0;
   line-height:1;
+  display:none;
 }
 
 .section-divider{
@@ -207,9 +197,10 @@ header.site-header{
 
 .section-title{
   margin:0 0 16px;
-  font-family:"Cinzel", serif;
+  font-family:"Inter", sans-serif;
   font-size:28px;
-  font-weight:600;
+  font-weight:700;
+  letter-spacing:0;
 }
 
 .home-main{
@@ -252,11 +243,11 @@ header.site-header{
 .home-title{
   margin:0 0 18px;
   max-width:12ch;
-  font-family:"Cinzel", serif;
+  font-family:"Inter", sans-serif;
   font-size:clamp(36px, 7vw, 72px);
   line-height:1.05;
-  font-weight:600;
-  letter-spacing:.01em;
+  font-weight:800;
+  letter-spacing:0;
 }
 
 .home-copy{
@@ -355,8 +346,10 @@ header.site-header{
 
 .home-rotator-copy h3{
   margin:0;
-  font-family:"Cinzel", serif;
+  font-family:"Inter", sans-serif;
   font-size:clamp(22px, 3vw, 32px);
+  font-weight:800;
+  letter-spacing:0;
   line-height:1.1;
   text-shadow:0 8px 24px rgba(0,0,0,0.44);
 }
@@ -408,7 +401,7 @@ header.site-header{
   border-radius:999px;
   display:grid;
   place-items:center;
-  font-family:"Cinzel", serif;
+  font-family:"Inter", sans-serif;
   font-size:clamp(28px, 4vw, 38px);
   letter-spacing:.08em;
   border:1px solid rgba(246,245,242,0.14);
@@ -644,10 +637,10 @@ body.artists-page .artist-card::after{
 
 .artist-header h3{
   margin:0;
-  font-family:"Cinzel", serif;
+  font-family:"Inter", sans-serif;
   font-size:24px;
-  font-weight:600;
-  letter-spacing:.02em;
+  font-weight:700;
+  letter-spacing:0;
 }
 
 .artist-info p{
@@ -822,9 +815,10 @@ audio::-webkit-media-controls-time-remaining-display{
 }
 .page-header-title{
   text-align:center;
-  font-family:"Cinzel", serif;
+  font-family:"Inter", sans-serif;
   font-size:clamp(20px, 4vw, 28px);
-  font-weight:600;
+  font-weight:700;
+  letter-spacing:0;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
@@ -929,9 +923,10 @@ body.booking-page .info-fieldset{
 
 .page-title{
   margin:26px 0 10px;
-  font-family:"Cinzel", serif;
+  font-family:"Inter", sans-serif;
   font-size:clamp(30px, 4vw, 40px);
-  font-weight:600;
+  font-weight:800;
+  letter-spacing:0;
 }
 
 .page-subtitle{
@@ -945,9 +940,10 @@ body.booking-page .info-fieldset{
 
 .section h2{
   margin:0 0 12px;
-  font-family:"Cinzel", serif;
+  font-family:"Inter", sans-serif;
   font-size:24px;
-  font-weight:600;
+  font-weight:700;
+  letter-spacing:0;
 }
 
 .artist-hero{
@@ -1647,4 +1643,165 @@ html[dir="rtl"] .lang{
   .home-rotator-copy h3{
     font-size:clamp(18px, 2vw, 24px);
   }
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background-image:url("assets/sophora_background.png");
+  background-repeat:no-repeat;
+  background-position:center center;
+  background-size:100vw 100vh;
+  opacity:.28;
+  mix-blend-mode:multiply;
+}
+
+body > *{
+  position:relative;
+  z-index:1;
+}
+
+body.home-page,
+body.artists-page,
+body.artist-page-shell,
+body.booking-page{
+  --public-surface:rgba(255,252,242,.78);
+  --public-surface-soft:rgba(255,250,240,.7);
+  --public-surface-hover:#fffaf0;
+  --public-border:rgba(16,45,32,.16);
+  --shadow:0 18px 48px rgba(16,45,32,.1);
+  background:transparent;
+}
+
+body.home-page .container,
+body.artists-page .container,
+body.artist-page-shell .container,
+body.booking-page .container{
+  max-width:1160px;
+}
+
+body.home-page .section-divider,
+body.home-page .content-divider,
+body.home-page .site-footer::after,
+body.artists-page .section-divider,
+body.artists-page .content-divider,
+body.artists-page .site-footer::after,
+body.artist-page-shell .section-divider,
+body.artist-page-shell .content-divider,
+body.artist-page-shell .site-footer::after,
+body.booking-page .section-divider,
+body.booking-page .content-divider,
+body.booking-page .site-footer::after,
+body.booking-page .page-header::after{
+  background:linear-gradient(90deg, transparent, rgba(16,45,32,.16), transparent);
+}
+
+body.home-page .home-kicker,
+body.artists-page .home-kicker,
+body.artist-page-shell .home-kicker,
+body.booking-page .home-kicker{
+  border-color:var(--public-border);
+  background:var(--public-surface-soft);
+}
+
+body.home-page .btn,
+body.artists-page .btn,
+body.artist-page-shell .btn,
+body.booking-page .btn,
+body.home-page .footer-social-btn,
+body.artists-page .footer-social-btn,
+body.artist-page-shell .footer-social-btn,
+body.booking-page .footer-social-btn,
+body.home-page .footer-item select,
+body.artists-page .footer-item select,
+body.artist-page-shell .footer-item select,
+body.booking-page .footer-item select{
+  border-color:var(--public-border);
+  background:var(--public-surface-soft);
+  color:var(--text);
+  box-shadow:none;
+}
+
+body.home-page .btn:hover,
+body.artists-page .btn:hover,
+body.artist-page-shell .btn:hover,
+body.booking-page .btn:hover,
+body.home-page .footer-social-btn:hover,
+body.artists-page .footer-social-btn:hover,
+body.artist-page-shell .footer-social-btn:hover,
+body.booking-page .footer-social-btn:hover{
+  border-color:rgba(182,106,74,.54);
+  background:var(--public-surface-hover);
+  color:var(--accent);
+}
+
+body.home-page .btn.primary,
+body.home-page .btn.secondary,
+body.home-page .btn.outline,
+body.artists-page .btn.primary,
+body.artists-page .btn.secondary,
+body.artists-page .btn.outline,
+body.artist-page-shell .btn.primary,
+body.artist-page-shell .btn.secondary,
+body.artist-page-shell .btn.outline,
+body.booking-page .btn.primary,
+body.booking-page .btn.secondary,
+body.booking-page .btn.outline{
+  border-color:var(--public-border);
+  background:var(--public-surface-soft);
+  color:var(--text);
+}
+
+body.home-page .home-rotator-slide,
+body.artist-page-shell .tiktok-embed-wrap,
+body.artist-page-shell .media-placeholder,
+body.artist-page-shell .photo-placeholder,
+body.booking-page .form fieldset,
+body.booking-page .info-fieldset,
+body.booking-page .booking-notify-options .backend-check label{
+  border:1px solid var(--public-border);
+  border-radius:24px;
+  background:var(--public-surface);
+  box-shadow:var(--shadow);
+}
+
+body.home-page .home-rotator-image-wrap,
+body.artists-page .artist-card img,
+body.artist-page-shell .artist-card img,
+body.artist-page-shell .artist-hero img,
+body.artist-page-shell audio,
+body.booking-page audio{
+  border-color:var(--public-border);
+  background:var(--public-surface-hover);
+}
+
+body.home-page .home-rotator-image-wrap::after{
+  content:none;
+}
+
+body.artists-page .artist-card::before,
+body.artists-page .artist-card::after{
+  background:linear-gradient(90deg, transparent, rgba(16,45,32,.16), transparent);
+}
+
+body.artist-page-shell .artist-card,
+body.booking-page .form input,
+body.booking-page .form textarea,
+body.booking-page .form select,
+body.booking-page .info-fieldset textarea,
+body.booking-page .select-white{
+  border-color:var(--public-border);
+  background:var(--public-surface-soft);
+  color:var(--text);
+}
+
+body.booking-page .form input[type="date"]{
+  color-scheme:light;
+}
+
+body.booking-page .form input[type="date"]::-webkit-calendar-picker-indicator{
+  filter:none;
 }

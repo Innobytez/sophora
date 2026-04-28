@@ -1,14 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root{
-  --backend-panel:rgba(14,14,14,0.92);
-  --backend-panel-soft:rgba(14,14,14,0.26);
-  --backend-border:rgba(246,245,242,0.12);
+  --backend-panel:rgba(255,250,240,0.94);
+  --backend-panel-soft:rgba(16,45,32,0.07);
+  --backend-border:rgba(16,45,32,0.14);
   --backend-accent:#b66a4a;
   --backend-accent-soft:rgba(182,106,74,0.14);
   --backend-success:#b6d1bf;
   --backend-danger:#d98f73;
-  --backend-shadow:0 24px 70px rgba(0,0,0,0.3);
+  --backend-shadow:0 24px 70px rgba(16,45,32,0.12);
   --schedule-panel-height:720px;
   --schedule-footer-height:64px;
   --schedule-edit-region-height:88px;
@@ -21,23 +21,13 @@
 .backend-shell:not(.auth-page){
   position:relative;
   isolation:isolate;
-  background:
-    radial-gradient(circle at 0% 2%, rgba(31,61,43,0.72), transparent 36%),
-    radial-gradient(circle at 30% 18%, rgba(31,61,43,0.24), transparent 28%),
-    radial-gradient(circle at 100% 4%, rgba(182,106,74,0.4), transparent 30%),
-    radial-gradient(circle at 78% 30%, rgba(182,106,74,0.18), transparent 34%),
-    radial-gradient(circle at 16% 76%, rgba(31,61,43,0.5), transparent 36%),
-    radial-gradient(circle at 42% 102%, rgba(31,61,43,0.28), transparent 34%),
-    radial-gradient(circle at 88% 84%, rgba(182,106,74,0.22), transparent 34%),
-    linear-gradient(155deg, rgba(182,106,74,0.1), rgba(14,14,14,0) 46%),
-    linear-gradient(180deg, rgba(31,61,43,0.22), rgba(14,14,14,0.02) 38%, rgba(31,61,43,0.18) 100%),
-    var(--bg);
+  background:transparent;
   background-attachment:fixed;
 }
 
 .backend-shell:not(.auth-page)::before,
 .backend-shell:not(.auth-page)::after{
-  content:"";
+  content:none;
   position:fixed;
   pointer-events:none;
   z-index:0;
@@ -75,7 +65,7 @@
   margin:28px 0 24px;
   border:1px solid var(--backend-border);
   border-radius:28px;
-  background:rgba(14,14,14,0.92);
+  background:var(--backend-panel);
   box-shadow:var(--backend-shadow);
 }
 
@@ -113,7 +103,7 @@
 .artist-page-shell .page-header-title,
 .artist-page-shell .artist-title{
   margin:16px 0 8px;
-  font-family:"Cinzel", serif;
+  font-family:"Inter", sans-serif;
   font-size:clamp(34px, 5vw, 56px);
   line-height:1.08;
 }
@@ -206,7 +196,7 @@
 
 .backend-compact-heading{
   margin:0;
-  font-family:"Cinzel", serif;
+  font-family:"Inter", sans-serif;
   font-size:24px;
 }
 
@@ -239,7 +229,7 @@
 .backend-card h2,
 .backend-card h3{
   margin:0 0 10px;
-  font-family:"Cinzel", serif;
+  font-family:"Inter", sans-serif;
   font-size:28px;
 }
 
@@ -299,8 +289,8 @@
 }
 
 .backend-media-manager-single .backend-media-toolbar{
-  display:grid;
-  grid-template-columns:minmax(0, 1fr) auto auto;
+  display:flex;
+  flex-wrap:wrap;
   align-items:center;
 }
 
@@ -345,6 +335,12 @@
   padding:14px;
 }
 
+.backend-media-preview-slot.is-empty{
+  display:grid;
+  place-items:center;
+  padding:14px;
+}
+
 .backend-media-item-preview img,
 .backend-media-preview-slot img{
   display:block;
@@ -380,6 +376,36 @@
   display:grid;
   gap:10px;
   align-content:start;
+}
+
+.backend-media-item-meta{
+  font-size:12px;
+  color:var(--muted);
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.backend-media-preview-empty{
+  display:grid;
+  place-items:center;
+  min-height:100%;
+  text-align:center;
+}
+
+.backend-media-document{
+  display:grid;
+  gap:12px;
+  align-content:center;
+  min-height:100%;
+  padding:18px;
+}
+
+.backend-media-document strong{
+  font-size:14px;
+  font-weight:600;
+  color:var(--text);
+  word-break:break-word;
 }
 
 .backend-media-item-controls .btn.is-active{
@@ -615,7 +641,7 @@
 }
 
 .backend-section-toggle span:first-child{
-  font-family:"Cinzel", serif;
+  font-family:"Inter", sans-serif;
   font-size:28px;
   line-height:1.1;
 }
@@ -1952,7 +1978,7 @@
 
 .artist-page-shell .artist-section-card h2{
   margin:0 0 12px;
-  font-family:"Cinzel", serif;
+  font-family:"Inter", sans-serif;
   font-size:28px;
 }
 
@@ -2196,4 +2222,23 @@ body.booking-page .booking-calendar-panel{
   .backend-form-grid.event-edit-form{
     grid-template-columns:1fr;
   }
+}
+
+.backend-shell:not(.auth-page)::before{
+  content:"";
+  inset:0;
+  width:auto;
+  height:auto;
+  border-radius:0;
+  background-image:url("assets/sophora_background.png");
+  background-repeat:no-repeat;
+  background-position:center center;
+  background-size:100vw 100vh;
+  opacity:.28;
+  filter:none;
+  mix-blend-mode:multiply;
+}
+
+.backend-shell:not(.auth-page)::after{
+  content:none;
 }

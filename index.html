@@ -1,118 +1,103 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sophora</title>
-  <meta name="description" content="Sophora curates live music experiences in Chile." />
+  <meta name="description" content="Sophora programa experiencias de musica en vivo en Chile." />
   <link rel="icon" type="image/png" href="assets/sophora_logo_square.png" />
   <link rel="apple-touch-icon" href="assets/sophora_logo_square.png" />
   <meta property="og:title" content="Sophora" />
-  <meta property="og:description" content="Sophora curates live music experiences in Chile." />
+  <meta property="og:description" content="Sophora programa experiencias de musica en vivo en Chile." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://innobytez.github.io/sophora/assets/sophora_logo_square.png" />
+  <meta property="og:image" content="https://sophora.cl/assets/sophora_logo_square.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Sophora" />
-  <meta name="twitter:description" content="Sophora curates live music experiences in Chile." />
-  <meta name="twitter:image" content="https://innobytez.github.io/sophora/assets/sophora_logo_square.png" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="backend.css" />
+  <meta name="twitter:description" content="Sophora programa experiencias de musica en vivo en Chile." />
+  <meta name="twitter:image" content="https://sophora.cl/assets/sophora_logo_square.png" />
+  <link rel="stylesheet" href="home-web.css" />
 </head>
-<body class="home-page">
-  <div class="container">
-    <header class="site-header">
-      <div class="brand center">
-        <img src="assets/sophora_logo.png" alt="Sophora logo" />
-        <div class="agency-title" data-i18n="agency_title">Music Agency</div>
+<body>
+  <main class="web-home" aria-label="Homepage de Sophora">
+    <section class="home-band" aria-label="Introduccion de Sophora">
+      <div class="home-band-inner home-hero-grid">
+        <div class="brand-lockup">
+          <img src="assets/sophora_logo.png" alt="Sophora" />
+          <address id="contact" class="contact-card contact-card-inline" aria-label="Contactar a Sophora">
+            <a class="contact-action" href="mailto:info@sophora.cl" aria-label="Enviar correo a info@sophora.cl">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 6.5h16v11H4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                <path d="m5.4 7.6 6.6 5.2 6.6-5.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>info@sophora.cl</span>
+            </a>
+            <a class="contact-action" href="#" aria-label="Enviar WhatsApp a Sophora" data-whatsapp-contact>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3.8a8.2 8.2 0 0 0-7 12.5L4 20.2l4.1-1A8.2 8.2 0 1 0 12 3.8Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                <path d="M9.2 8.7c.2-.3.4-.4.7-.4h.5c.2 0 .4.1.5.4l.5 1.4c.1.2 0 .4-.1.5l-.4.5c-.1.1-.1.3 0 .4.3.6.9 1.3 1.7 1.8.2.1.3.1.5-.1l.5-.5c.1-.2.3-.2.5-.1l1.3.6c.3.1.4.3.3.6l-.2.6c-.1.3-.4.5-.7.6-.5.1-1.3.1-2.5-.5-1.8-.9-3.1-2.9-3.3-4.4-.1-.6 0-1.1.3-1.5Z" fill="currentColor"/>
+              </svg>
+              <span data-whatsapp-label>WhatsApp</span>
+            </a>
+            <a
+              class="contact-action"
+              href="mailto:info@sophora.cl?subject=Acceso%20de%20artistas"
+              aria-label="Acceso de artistas"
+            >
+              Acceso de artistas
+            </a>
+          </address>
+          <div class="brand-copy">
+            <p>Articulamos experiencias en vivo que generan valor para empresas, artistas y el ecosistema creativo.</p>
+          </div>
+        </div>
+
+        <a class="gallery-card catalog-gallery-card" href="/catalogodeartistas" aria-label="Ver catalogo de artistas">
+          <img id="gallery-image" src="assets/artist-placeholder.svg" alt="" />
+          <span class="catalog-gallery-overlay">
+            <span class="catalog-gallery-title">Catalogo de Artistas</span>
+            <span class="catalog-gallery-button">Explorar</span>
+          </span>
+        </a>
       </div>
-    </header>
-    <div class="section-divider" aria-hidden="true"></div>
+    </section>
 
-    <main class="home-main">
-      <section class="home-intro-panel">
-        <h1 class="home-title" data-i18n="home_intro_title">Live music for Chilean events.</h1>
-        <p class="home-copy" data-i18n="home_intro_body">Sophora connects distinctive artists with hotels, private celebrations, cultural programs, and brand experiences, pairing careful curation with booking and production support.</p>
-        <p class="home-copy muted" data-i18n="home_intro_support">We shape each musical atmosphere with close artist collaboration, sharp logistics, and a strong sense of place.</p>
-      </section>
-
-      <div class="section-divider" aria-hidden="true"></div>
-
-      <section class="home-gallery-section">
-        <div class="home-section-heading">
-          <h2 class="section-title" data-i18n="home_gallery_title">Artists in rotation</h2>
-          <p class="page-subtitle" data-i18n="home_gallery_body">A quick look at the artists currently shaping the Sophora roster.</p>
-        </div>
-        <div id="home-rotator" class="home-rotator">
-          <p class="backend-status active">Loading...</p>
-        </div>
-        <div class="home-list-button-wrap">
-          <a class="btn outline book-logo-btn" href="artists.html">
-            <img src="assets/sophora_logo.png" alt="" aria-hidden="true" />
-            <span data-i18n="other_artists">Artist List</span>
-          </a>
-        </div>
-      </section>
-
-      <div class="section-divider" aria-hidden="true"></div>
-
-      <section class="home-collaborators-section">
-        <div class="home-section-heading">
-          <h2 class="section-title" data-i18n="collaborators_title">Collaborators</h2>
-          <p class="page-subtitle" data-i18n="collaborators_body">Sophora works alongside trusted creative and production partners.</p>
-        </div>
-        <div class="collaborator-grid">
-          <article class="collaborator-card">
-            <div class="collaborator-mark collaborator-mark-corfu" aria-hidden="true">
-              <span>CC</span>
+    <div class="lower-stage">
+      <div class="lower-scroll">
+        <section class="home-band" aria-label="Servicios de Sophora">
+          <div class="home-band-inner service-section">
+            <div class="service-grid">
+            <article class="service-card">
+              <div class="card-content">
+                <h2>Convenio empresas</h2>
+                <p>Experiencias musicales para marcas, hoteles y espacios corporativos.</p>
+                <a href="/convenioempresas">Informacion</a>
+              </div>
+            </article>
+            <article class="service-card">
+              <div class="card-content">
+                <h2>Eventos y celebraciones</h2>
+                <p>Musica en vivo para celebraciones, bodas y momentos especiales.</p>
+                <a href="#contact">Reservar</a>
+              </div>
+            </article>
             </div>
-            <h3>Corfu Chile</h3>
-          </article>
-          <article class="collaborator-card">
-            <div class="collaborator-mark collaborator-mark-innobytez" aria-hidden="true">
-              <span>IN</span>
-            </div>
-            <h3>Innobytez</h3>
-          </article>
-          <article class="collaborator-card">
-            <div class="collaborator-mark collaborator-mark-brain" aria-hidden="true">
-              <span>JB</span>
-            </div>
-            <h3>Javi's Brain Productions</h3>
-          </article>
-        </div>
-      </section>
+          </div>
+        </section>
 
-      <div class="section-divider" aria-hidden="true"></div>
-    </main>
-
-    <footer class="site-footer">
-      <div class="footer-grid">
-        <div class="footer-item footer-copyright">
-          <span class="footer-label" data-i18n="copyright_label">© 2026</span>
-          <a class="footer-value" href="index.html">sophora.cl</a>
-        </div>
-        <div class="footer-item footer-email">
-          <span class="footer-label" data-i18n="email_label">Mail</span>
-          <a class="footer-value" id="footer-email-link" href="#"></a>
-        </div>
-        <div class="footer-item footer-whatsapp">
-          <span class="footer-label" data-i18n="whatsapp_label">Whatsapp</span>
-          <a class="footer-value" id="footer-whatsapp-link" href="#"></a>
-        </div>
-        <div class="footer-item footer-language">
-          <span class="footer-label" data-i18n="language_label">Language</span>
-          <select id="lang-select" aria-label="Language"></select>
-        </div>
+        <section class="home-band" aria-label="Colaboradores de Sophora">
+          <div class="home-band-inner collaborator-inner">
+            <p class="collaborator-copy">Sophora trabaja de cerca con colaboradores creativos y de produccion para entregar musica en vivo de alta calidad.</p>
+            <div class="collaborator-grid">
+              <span class="collaborator-mark" aria-label="Colaborador C1">C1</span>
+              <span class="collaborator-mark" aria-label="Colaborador Wave">Wave</span>
+              <span class="collaborator-mark" aria-label="Colaborador C3">C3</span>
+            </div>
+          </div>
+        </section>
       </div>
-      <div class="footer-access">
-        <a class="btn outline footer-access-btn" href="/auth.html" data-i18n="artist_access">Artist Access</a>
-      </div>
-    </footer>
-  </div>
+    </div>
+  </main>
 
-  <script src="i18n.js" defer></script>
-  <script src="site.js" defer></script>
-  <script src="backend-common.js" defer></script>
-  <script src="home.js" defer></script>
+  <script src="home-web.js" defer></script>
 </body>
 </html>
