@@ -3306,27 +3306,54 @@ app.get("/", (req, res) => {
 });
 
 app.get("/paraempresas", (req, res) => {
-  res.redirect(301, "/convenioempresas");
+  res.redirect(301, "/empresas");
 });
 
 app.get("/paraempresas/", (req, res) => {
-  res.redirect(301, "/convenioempresas");
+  res.redirect(301, "/empresas");
 });
 
 app.get("/convenioempresas", (req, res) => {
-  res.sendFile(path.join(config.rootDir, "paraempresas.html"));
+  res.redirect(301, "/empresas");
 });
 
 app.get("/convenioempresas/", (req, res) => {
+  res.redirect(301, "/empresas");
+});
+
+app.get("/empresas", (req, res) => {
+  res.sendFile(path.join(config.rootDir, "paraempresas.html"));
+});
+
+app.get("/empresas/", (req, res) => {
   res.sendFile(path.join(config.rootDir, "paraempresas.html"));
 });
 
 app.get("/catalogodeartistas", (req, res) => {
-  res.sendFile(path.join(config.rootDir, "catalogodeartistas.html"));
+  res.redirect(301, "/artistas");
 });
 
 app.get("/catalogodeartistas/", (req, res) => {
+  res.redirect(301, "/artistas");
+});
+
+app.get("/artistas", (req, res) => {
   res.sendFile(path.join(config.rootDir, "catalogodeartistas.html"));
+});
+
+app.get("/artistas/", (req, res) => {
+  res.sendFile(path.join(config.rootDir, "catalogodeartistas.html"));
+});
+
+app.get("/artistas/:slug/", (req, res, next) => {
+  if (!hasStaticCatalogArtist(req.params.slug)) return next();
+  return res.sendFile(path.join(config.rootDir, "artist-catalog-page.html"));
+});
+
+app.get("/artistas/:slug", (req, res, next) => {
+  if (req.path.endsWith("/")) return next();
+  if (!hasStaticCatalogArtist(req.params.slug)) return next();
+  return res.sendFile(path.join(config.rootDir, "artist-catalog-page.html"));
 });
 
 app.use("/assets", express.static(path.join(config.rootDir, "assets"), { index: false }));

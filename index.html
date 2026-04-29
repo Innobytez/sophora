@@ -17,85 +17,59 @@
   <meta name="twitter:image" content="https://sophora.cl/assets/sophora_logo_square.png" />
   <link rel="stylesheet" href="home-web.css" />
 </head>
-<body>
-  <main class="web-home" aria-label="Homepage de Sophora">
-    <section class="home-band" aria-label="Introduccion de Sophora">
-      <div class="home-band-inner home-hero-grid">
-        <div class="brand-lockup">
-          <img src="assets/sophora_logo.png" alt="Sophora" />
-          <address id="contact" class="contact-card contact-card-inline" aria-label="Contactar a Sophora">
-            <a class="contact-action" href="mailto:info@sophora.cl" aria-label="Enviar correo a info@sophora.cl">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M4 6.5h16v11H4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-                <path d="m5.4 7.6 6.6 5.2 6.6-5.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              <span>info@sophora.cl</span>
-            </a>
-            <a class="contact-action" href="#" aria-label="Enviar WhatsApp a Sophora" data-whatsapp-contact>
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 3.8a8.2 8.2 0 0 0-7 12.5L4 20.2l4.1-1A8.2 8.2 0 1 0 12 3.8Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-                <path d="M9.2 8.7c.2-.3.4-.4.7-.4h.5c.2 0 .4.1.5.4l.5 1.4c.1.2 0 .4-.1.5l-.4.5c-.1.1-.1.3 0 .4.3.6.9 1.3 1.7 1.8.2.1.3.1.5-.1l.5-.5c.1-.2.3-.2.5-.1l1.3.6c.3.1.4.3.3.6l-.2.6c-.1.3-.4.5-.7.6-.5.1-1.3.1-2.5-.5-1.8-.9-3.1-2.9-3.3-4.4-.1-.6 0-1.1.3-1.5Z" fill="currentColor"/>
-              </svg>
-              <span data-whatsapp-label>WhatsApp</span>
-            </a>
-            <a
-              class="contact-action"
-              href="mailto:info@sophora.cl?subject=Acceso%20de%20artistas"
-              aria-label="Acceso de artistas"
-            >
-              Acceso de artistas
-            </a>
-          </address>
-          <div class="brand-copy">
-            <p>Articulamos experiencias en vivo que generan valor para empresas, artistas y el ecosistema creativo.</p>
-          </div>
-        </div>
-
-        <a class="gallery-card catalog-gallery-card" href="/catalogodeartistas" aria-label="Ver catalogo de artistas">
-          <img id="gallery-image" src="assets/artist-placeholder.svg" alt="" />
-          <span class="catalog-gallery-overlay">
-            <span class="catalog-gallery-title">Catalogo de Artistas</span>
-            <span class="catalog-gallery-button">Explorar</span>
-          </span>
+<body class="sophora-shell home-page">
+  <main class="site-frame" aria-label="Homepage de Sophora">
+    <header class="site-topbar">
+      <a class="brand-mark" href="/" aria-label="Sophora">
+        <img src="assets/sophora_logo.png" alt="Sophora" />
+      </a>
+      <address id="contact" class="contact-strip" aria-label="Contactar a Sophora">
+        <a href="mailto:info@sophora.cl">info@sophora.cl</a>
+        <a href="https://wa.me/56920474645" target="_blank" rel="noreferrer" data-whatsapp-contact>
+          <span data-whatsapp-label>+56 9 2047 4645</span>
         </a>
+        <a href="mailto:info@sophora.cl?subject=Acceso%20de%20artistas">Acceso de artistas</a>
+      </address>
+    </header>
+
+    <section class="hero-grid" aria-label="Introduccion de Sophora">
+      <div class="hero-copy">
+        <p class="eyebrow">Sophora</p>
+        <h1>Articulamos experiencias en vivo que generan valor para empresas, artistas y el ecosistema creativo.</h1>
       </div>
+
+      <a class="feature-panel media-panel" href="/artistas" aria-label="Ver catalogo de artistas">
+        <img id="gallery-image" src="assets/artist-placeholder.svg" alt="" />
+        <span class="feature-panel-overlay">
+          <span>Catalogo de Artistas</span>
+          <strong>Explorar</strong>
+        </span>
+      </a>
     </section>
 
-    <div class="lower-stage">
-      <div class="lower-scroll">
-        <section class="home-band" aria-label="Servicios de Sophora">
-          <div class="home-band-inner service-section">
-            <div class="service-grid">
-            <article class="service-card">
-              <div class="card-content">
-                <h2>Convenio empresas</h2>
-                <p>Experiencias musicales para marcas, hoteles y espacios corporativos.</p>
-                <a href="/convenioempresas">Informacion</a>
-              </div>
-            </article>
-            <article class="service-card">
-              <div class="card-content">
-                <h2>Eventos y celebraciones</h2>
-                <p>Musica en vivo para celebraciones, bodas y momentos especiales.</p>
-                <a href="#contact">Reservar</a>
-              </div>
-            </article>
-            </div>
-          </div>
-        </section>
+    <section class="service-runway" aria-label="Servicios de Sophora">
+      <a class="runway-card runway-card-primary" href="/empresas">
+        <span>01</span>
+        <h2>Convenio empresas</h2>
+        <p>Experiencias musicales para marcas, hoteles y espacios corporativos.</p>
+        <strong>Informacion</strong>
+      </a>
+      <a class="runway-card" href="#contact">
+        <span>02</span>
+        <h2>Eventos y celebraciones</h2>
+        <p>Musica en vivo para celebraciones, bodas y momentos especiales.</p>
+        <strong>Reservar</strong>
+      </a>
+    </section>
 
-        <section class="home-band" aria-label="Colaboradores de Sophora">
-          <div class="home-band-inner collaborator-inner">
-            <p class="collaborator-copy">Sophora trabaja de cerca con colaboradores creativos y de produccion para entregar musica en vivo de alta calidad.</p>
-            <div class="collaborator-grid">
-              <span class="collaborator-mark" aria-label="Colaborador C1">C1</span>
-              <span class="collaborator-mark" aria-label="Colaborador Wave">Wave</span>
-              <span class="collaborator-mark" aria-label="Colaborador C3">C3</span>
-            </div>
-          </div>
-        </section>
+    <section class="collaborator-marquee" aria-label="Colaboradores de Sophora">
+      <p>Sophora trabaja de cerca con colaboradores creativos y de produccion para entregar musica en vivo de alta calidad.</p>
+      <div>
+        <span>C1</span>
+        <span>Wave</span>
+        <span>C3</span>
       </div>
-    </div>
+    </section>
   </main>
 
   <script src="home-web.js" defer></script>

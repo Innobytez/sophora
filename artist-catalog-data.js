@@ -20,8 +20,8 @@ window.SOPHORA_ARTISTS = [
     name: "Carmeners",
     tagline: "Grupo vocal elegante que mezcla jazz, soul y pop moderno para venues premium.",
     image: "/artists/carmeners/assets/the-carmeners-jpg.webp",
-    audio: "/artists/carmeners/assets/the-carmeners-audio-preview-20s.mp3",
-    previewVideo: "",
+    audio: "",
+    previewVideo: "/artists/carmeners/assets/the-carmeners-tiktok-preview-20s.mp4",
     photos: [
       "/artists/carmeners/assets/the-carmeners-jpg.webp",
       "/artists/carmeners/assets/the-carmeners-logo.jpeg"

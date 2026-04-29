@@ -11,7 +11,7 @@
   }
 
   function artistUrl(artist) {
-    return `/artists/${encodeURIComponent(artist.slug)}/`;
+    return `/artistas/${encodeURIComponent(artist.slug)}/`;
   }
 
   function audioMarkup(artist) {
@@ -110,7 +110,7 @@
             <a href="mailto:info@sophora.cl">info@sophora.cl</a>
             <a href="https://wa.me/56920474645" target="_blank" rel="noreferrer">+56 9 2047 4645</a>
             <a href="/">&lt;Volver al inicio</a>
-            <a href="/catalogodeartistas">&lt;Volver al catalogo</a>
+            <a href="/artistas">&lt;Volver al catalogo</a>
           </nav>
         </section>
       `;
@@ -129,7 +129,7 @@
             <a href="mailto:info@sophora.cl?subject=${encodeURIComponent(artist.name)}">info@sophora.cl</a>
             <a href="https://wa.me/56920474645" target="_blank" rel="noreferrer">+56 9 2047 4645</a>
             <a href="/">&lt;Volver al inicio</a>
-            <a href="/catalogodeartistas">&lt;Volver al catalogo</a>
+            <a href="/artistas">&lt;Volver al catalogo</a>
           </nav>
           <h1>${escapeHtml(artist.name)}</h1>
           <p>${escapeHtml(artist.tagline)}</p>

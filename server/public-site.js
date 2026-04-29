@@ -32,14 +32,22 @@ app.use("/artists", express.static(path.join(rootDir, "artists"), { index: false
 app.use("/uploads", express.static(path.join(rootDir, "uploads"), { index: false }));
 
 app.get("/", (req, res) => sendRootFile(res, "index.html"));
-app.get(/^\/convenioempresas\/?$/, (req, res) => sendRootFile(res, "paraempresas.html"));
-app.get(/^\/paraempresas\/?$/, (req, res) => res.redirect(301, "/convenioempresas"));
-app.get(/^\/catalogodeartistas\/?$/, (req, res) => sendRootFile(res, "catalogodeartistas.html"));
+app.get(/^\/empresas\/?$/, (req, res) => sendRootFile(res, "paraempresas.html"));
+app.get(/^\/convenioempresas\/?$/, (req, res) => res.redirect(301, "/empresas"));
+app.get(/^\/paraempresas\/?$/, (req, res) => res.redirect(301, "/empresas"));
+app.get(/^\/artistas\/?$/, (req, res) => sendRootFile(res, "catalogodeartistas.html"));
+app.get(/^\/catalogodeartistas\/?$/, (req, res) => res.redirect(301, "/artistas"));
+
+app.get(/^\/artistas\/([^/]+)\/?$/, (req, res, next) => {
+  const slug = req.params[0];
+  if (!catalogArtistSlugs.has(slug)) return next();
+  sendRootFile(res, "artist-catalog-page.html");
+});
 
 app.get(/^\/artists\/([^/]+)\/?$/, (req, res, next) => {
   const slug = req.params[0];
   if (!catalogArtistSlugs.has(slug)) return next();
-  sendRootFile(res, "artist-catalog-page.html");
+  res.redirect(301, `/artistas/${slug}/`);
 });
 
 [

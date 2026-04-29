@@ -1,135 +1,60 @@
-.artist-catalog-body{
-  min-height:100vh;
-  overflow:auto;
-}
-
 .artist-catalog-page,
 .artist-detail-page{
-  width:min(100%, 1240px);
   min-height:100vh;
-  margin:0 auto;
-  padding:clamp(22px, 4vw, 52px);
 }
 
-.catalog-hero,
-.artist-detail-hero{
+.catalog-hero{
   display:grid;
-  justify-items:center;
-  gap:16px;
-  padding:clamp(12px, 2vw, 28px) 0 clamp(26px, 4vw, 46px);
-  text-align:center;
+  gap:18px;
+  margin-bottom:clamp(30px, 6vh, 78px);
 }
 
-.catalog-logo-link{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:min(100%, 340px);
-  transition:opacity 180ms ease;
-}
-
-.catalog-logo-link:hover{
-  opacity:.78;
-}
-
-.catalog-logo-link img{
-  width:100%;
-  height:auto;
-  display:block;
-}
-
-.catalog-actions{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:8px;
-}
-
-.catalog-actions a,
-.catalog-doc-link{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:30px;
-  padding:0 12px;
-  border:1px solid rgba(0,0,0,.16);
-  border-radius:999px;
-  background:rgba(255,250,240,.38);
-  color:rgba(0,0,0,.74);
-  -webkit-backdrop-filter:blur(5px);
-  backdrop-filter:blur(5px);
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:.02em;
-  transition:background 180ms ease, border-color 180ms ease, color 180ms ease;
-}
-
-.catalog-actions a:hover,
-.catalog-doc-link:hover{
-  border-color:rgba(182,106,74,.42);
-  background:rgba(255,250,240,.62);
-  color:#000;
-}
-
-.catalog-hero p{
-  width:min(100%, 560px);
-  margin:0;
-  color:var(--muted);
-  font-size:14px;
-  font-weight:500;
-  line-height:1.44;
+.catalog-hero h1{
+  max-width:13ch;
 }
 
 .catalog-grid{
   display:grid;
   grid-template-columns:repeat(4, minmax(0, 1fr));
-  gap:clamp(16px, 2.2vw, 28px);
-  align-items:stretch;
+  gap:1px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:34px;
+  background:var(--line);
+  box-shadow:var(--shadow);
 }
 
 .catalog-card{
-  min-height:100%;
-  overflow:hidden;
-  border:1px solid rgba(0,0,0,.1);
-  border-radius:24px;
-  background:rgba(255,250,240,.52);
-  -webkit-backdrop-filter:blur(8px);
-  backdrop-filter:blur(8px);
-  box-shadow:0 20px 44px rgba(16,45,32,.1);
-  text-align:left;
-  transition:transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  min-height:520px;
+  display:grid;
+  grid-template-rows:1fr auto;
+  background:
+    linear-gradient(160deg, rgba(248,241,223,.085), rgba(248,241,223,.025)),
+    #0f1211;
 }
 
-.catalog-card:hover{
-  transform:translateY(-4px);
-  background:rgba(255,250,240,.68);
-  box-shadow:0 26px 58px rgba(16,45,32,.14);
-}
-
-.catalog-card-image{
-  display:block;
+.catalog-card-image,
+.catalog-card-video{
   width:100%;
-  aspect-ratio:4 / 3;
+  min-height:320px;
+  display:block;
   overflow:hidden;
-  background:#fffaf0;
+  background:#050505;
+}
+
+.catalog-card-image img,
+.catalog-card-video{
+  width:100%;
+  height:100%;
+  min-height:320px;
+  object-fit:cover;
+  object-position:center;
+  filter:saturate(.9) contrast(1.05);
 }
 
 .catalog-card-image img{
-  width:100%;
-  height:100%;
   display:block;
-  object-fit:cover;
-  object-position:center;
-  transition:transform 420ms ease;
-}
-
-.catalog-card-video{
-  width:100%;
-  aspect-ratio:4 / 3;
-  display:block;
-  object-fit:cover;
-  object-position:center;
-  background:#000;
+  transition:transform 900ms cubic-bezier(.2,.8,.2,1);
 }
 
 .catalog-card:hover .catalog-card-image img{
@@ -138,80 +63,81 @@
 
 .catalog-card-copy{
   display:grid;
-  gap:10px;
-  padding:16px;
+  align-content:start;
+  gap:12px;
+  min-height:200px;
+  padding:22px;
 }
 
 .catalog-card h2{
   margin:0;
-  color:#111;
-  font-size:17px;
-  font-weight:800;
-  line-height:1.14;
+  color:#fff6dc;
+  font-family:"Instrument Serif", serif;
+  font-size:clamp(34px, 3vw, 52px);
+  font-weight:400;
+  letter-spacing:-.055em;
+  line-height:.88;
 }
 
 .catalog-card p{
-  min-height:58px;
   margin:0;
   color:var(--muted);
   font-size:12px;
-  font-weight:500;
-  line-height:1.36;
-}
-
-.catalog-audio{
-  display:grid;
-  gap:7px;
+  font-weight:600;
+  line-height:1.45;
 }
 
 .catalog-audio audio{
   width:100%;
   height:34px;
+  filter:sepia(.28) saturate(.74);
 }
 
 .artist-detail-hero{
-  grid-template-columns:minmax(280px, .92fr) minmax(360px, 1.08fr);
-  gap:clamp(32px, 5vw, 72px);
+  display:grid;
+  grid-template-columns:minmax(320px, .9fr) minmax(430px, 1.1fr);
+  gap:clamp(30px, 6vw, 90px);
   align-items:center;
-  min-height:48vh;
+  min-height:calc(80vh - 120px);
 }
 
 .artist-detail-copy{
   display:grid;
-  justify-items:center;
-  gap:15px;
+  gap:18px;
 }
 
 .artist-detail-copy h1{
+  max-width:8.5ch;
   margin:0;
-  color:#111;
-  font-size:clamp(34px, 5vw, 74px);
-  font-weight:800;
-  letter-spacing:-.045em;
-  line-height:.93;
+  color:#fff6dc;
+  font-family:"Instrument Serif", serif;
+  font-size:clamp(64px, 10vw, 148px);
+  font-weight:400;
+  letter-spacing:-.075em;
+  line-height:.78;
 }
 
 .artist-detail-copy p{
-  width:min(100%, 460px);
+  max-width:42ch;
   margin:0;
   color:var(--muted);
   font-size:14px;
-  font-weight:500;
-  line-height:1.44;
+  font-weight:600;
+  line-height:1.55;
 }
 
 .artist-detail-main-image{
-  width:min(100%, 560px);
   margin:0;
   overflow:hidden;
-  border-radius:30px;
-  background:var(--panel-strong);
-  box-shadow:0 28px 70px rgba(16,45,32,.13);
+  border:1px solid var(--line);
+  border-radius:36px;
+  background:var(--glass);
+  box-shadow:var(--shadow);
 }
 
 .artist-detail-main-image img{
   width:100%;
-  height:clamp(260px, 44vh, 520px);
+  height:clamp(420px, 62vh, 760px);
   display:block;
   object-fit:cover;
   object-position:center;
@@ -219,89 +145,107 @@
 
 .artist-media-section{
   display:grid;
-  gap:clamp(18px, 3vw, 34px);
-  padding-bottom:clamp(28px, 5vw, 64px);
+  gap:18px;
+  margin-top:clamp(38px, 8vh, 100px);
+  padding-bottom:60px;
 }
 
 .artist-media-block{
   display:grid;
-  gap:14px;
-  padding:clamp(16px, 2.4vw, 26px);
-  border:1px solid rgba(0,0,0,.1);
-  border-radius:24px;
-  background:rgba(255,250,240,.48);
-  -webkit-backdrop-filter:blur(8px);
-  backdrop-filter:blur(8px);
-  box-shadow:0 20px 44px rgba(16,45,32,.08);
+  gap:18px;
+  padding:clamp(20px, 4vw, 42px);
+  border:1px solid var(--line);
+  border-radius:34px;
+  background:linear-gradient(145deg, rgba(248,241,223,.085), rgba(248,241,223,.025));
 }
 
 .artist-media-block h2{
   margin:0;
-  color:#111;
-  font-size:15px;
+  color:var(--gold);
+  font-size:11px;
   font-weight:800;
-  letter-spacing:.08em;
+  letter-spacing:.22em;
   text-transform:uppercase;
 }
 
 .artist-photo-wall{
   display:grid;
   grid-template-columns:repeat(3, minmax(0, 1fr));
-  gap:12px;
+  gap:10px;
 }
 
 .artist-photo-wall img{
   width:100%;
-  height:clamp(170px, 24vw, 300px);
+  height:clamp(240px, 28vw, 440px);
   display:block;
   object-fit:cover;
-  object-position:center;
-  border-radius:18px;
+  border-radius:24px;
 }
 
 .artist-video-wall{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
   gap:12px;
 }
 
 .artist-video-wall video{
   width:100%;
-  max-height:520px;
-  border-radius:18px;
+  max-height:620px;
+  border-radius:24px;
   background:#000;
 }
 
 .artist-doc-grid{
   display:flex;
   flex-wrap:wrap;
-  justify-content:center;
   gap:10px;
 }
 
-@media (max-width:980px){
+.catalog-doc-link{
+  min-height:38px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 16px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:rgba(248,241,223,.05);
+  color:rgba(248,241,223,.78);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.catalog-doc-link:hover{
+  border-color:rgba(215,180,106,.58);
+  background:rgba(215,180,106,.12);
+  color:#fff6dc;
+}
+
+@media (max-width:1100px){
   .catalog-grid{
     grid-template-columns:repeat(2, minmax(0, 1fr));
   }
+}
 
+@media (max-width:900px){
   .artist-detail-hero{
     grid-template-columns:1fr;
-    min-height:auto;
   }
 }
 
 @media (max-width:620px){
-  .artist-catalog-page,
-  .artist-detail-page{
-    padding:20px 14px 34px;
-  }
-
   .catalog-grid,
   .artist-photo-wall{
     grid-template-columns:1fr;
   }
 
-  .catalog-logo-link{
-    width:min(100%, 280px);
+  .catalog-card{
+    min-height:auto;
+  }
+
+  .artist-detail-copy h1{
+    font-size:clamp(58px, 18vw, 92px);
   }
 }
