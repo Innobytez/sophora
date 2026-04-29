@@ -3,33 +3,64 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Artistas | Sophora</title>
-  <meta name="description" content="Catalogo de artistas Sophora para programacion musical y experiencias en vivo." />
+  <title>Catálogo de Artistas | Sophora</title>
+  <meta name="description" content="Catálogo de artistas Sophora para programación musical y experiencias en vivo." />
   <link rel="icon" type="image/png" href="/assets/sophora_logo_square.png" />
   <link rel="apple-touch-icon" href="/assets/sophora_logo_square.png" />
   <link rel="stylesheet" href="/home-web.css" />
   <link rel="stylesheet" href="/artist-catalog.css" />
 </head>
-<body class="sophora-shell artist-catalog-body" data-catalog-mode="list">
-  <main class="site-frame artist-catalog-page" aria-label="Catalogo de artistas Sophora">
-    <header class="site-topbar">
+<body class="artist-catalog-list-page" data-catalog-mode="list">
+  <div class="site-shell">
+    <header class="site-nav">
       <a class="brand-mark" href="/" aria-label="Sophora">
         <img src="/assets/sophora_logo.png" alt="Sophora" />
       </a>
-      <nav class="contact-strip" aria-label="Acciones de catalogo">
-        <a href="mailto:info@sophora.cl">info@sophora.cl</a>
-        <a href="https://wa.me/56920474645" target="_blank" rel="noreferrer">+56 9 2047 4645</a>
-        <a href="/">&lt;Volver al inicio</a>
+      <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button><nav class="primary-nav" aria-label="Navegación principal">
+        <a href="/eventos">Eventos Especiales</a>
+        <a href="/empresas">Convenio Empresas</a>
+        <a href="/artistas">Catálogo de Artistas</a>
+        
+        <a href="/unirse">Únete a Sophora</a>
+        <a class="nav-pill" href="/login">Login Artistas</a><a href="/contacto">Contacto</a>
       </nav>
     </header>
 
-    <section class="catalog-hero">
-      <p class="eyebrow">Catalogo de Artistas</p>
-      <h1>Catalogo de artistas seleccionados para experiencias musicales en vivo, eventos privados y programacion continua.</h1>
-    </section>
+    <main class="page-main artist-catalog-page" aria-label="Catálogo de artistas Sophora">
+      <section class="page-hero catalog-hero">
+        <div class="page-hero-inner">
+          <p class="eyebrow">Catálogo de Artistas</p>
+          <h1>Proyectos seleccionados para experiencias musicales en vivo.</h1>
+          <p>Explora artistas disponibles para eventos especiales, convenios de empresas y programación continua.</p>
+        </div>
+      </section>
 
-    <section class="catalog-grid" id="artist-catalog-grid" aria-label="Artistas"></section>
-  </main>
+      <section class="catalog-grid section-wrap" id="artist-catalog-grid" aria-label="Artistas"></section>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-brand-row">
+            <img src="/assets/sophora_logo.png" alt="Sophora" />
+            <span>© 2026</span>
+          </div>
+          <p>Experiencias musicales en vivo para eventos, empresas y espacios que buscan una identidad sonora cuidada.</p>
+        </div>
+        <div class="footer-column">
+          <a href="/contacto">Contacto</a>
+          <a href="/preguntas">Preguntas frecuentes</a>
+          <a href="mailto:info@sophora.cl">info@sophora.cl</a>
+          <a href="https://wa.me/56920474645" target="_blank" rel="noreferrer">+56 9 2047 4645</a>
+        </div>
+        <div class="footer-column">
+          <a href="/artistas">Catálogo de artistas</a>
+          <a href="/unirse">Únete a Sophora</a>
+          <a href="/login">Login artistas</a>
+          <a href="/privacidad">Privacidad</a>
+        </div>
+      </div>
+    </footer>
+  </div>
 
   <script src="/artist-catalog-data.js"></script>
   <script src="/artist-catalog.js"></script>

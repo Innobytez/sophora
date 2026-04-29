@@ -3,72 +3,94 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Empresas | Sophora</title>
-  <meta name="description" content="Programacion musical para empresas con experiencias en vivo, continuidad y artistas profesionales." />
+  <title>Convenio Empresas | Sophora</title>
+  <meta name="description" content="Programación musical para empresas con experiencias en vivo, continuidad y artistas profesionales." />
   <link rel="icon" type="image/png" href="assets/sophora_logo_square.png" />
   <link rel="apple-touch-icon" href="assets/sophora_logo_square.png" />
   <link rel="stylesheet" href="home-web.css" />
 </head>
-<body class="sophora-shell empresas-page">
-  <main class="site-frame" aria-label="Empresas">
-    <header class="site-topbar">
+<body>
+  <div class="site-shell">
+    <header class="site-nav">
       <a class="brand-mark" href="/" aria-label="Sophora">
         <img src="assets/sophora_logo.png" alt="Sophora" />
       </a>
-      <address class="contact-strip" aria-label="Contactar a Sophora">
-        <a href="mailto:info@sophora.cl">info@sophora.cl</a>
-        <a href="https://wa.me/56920474645" target="_blank" rel="noreferrer">+56 9 2047 4645</a>
-        <a href="/">&lt;Volver al inicio</a>
-      </address>
+      <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button><nav class="primary-nav" aria-label="Navegación principal">
+        <a href="/eventos">Eventos Especiales</a>
+        <a href="/empresas">Convenio Empresas</a>
+        <a href="/artistas">Catálogo de Artistas</a>
+        
+        <a href="/unirse">Únete a Sophora</a>
+        <a class="nav-pill" href="/login">Login Artistas</a><a href="/contacto">Contacto</a>
+      </nav>
     </header>
 
-    <section class="empresas-hero">
-      <div class="empresas-statement">
-        <p class="eyebrow">Convenio empresas</p>
-        <h1>Diseñamos formatos musicales adaptables a tu empresa. Gestionamos tus eventos y coordinamos tu programación musical continua ejecutadas por artistas profesionales. Ofrecemos dos tipos principales de servicios para empresas: programación continua y experiencias de identidad.</h1>
+    <main class="page-main">
+      <section class="page-hero">
+        <div class="page-hero-inner">
+          <p class="eyebrow">Convenio Empresas</p>
+          <h1>Programación musical para marcas, espacios y experiencias recurrentes.</h1>
+          <p>Diseñamos formatos musicales adaptables a tu empresa. Gestionamos tus eventos y coordinamos tu programación musical continua ejecutadas por artistas profesionales. Ofrecemos dos tipos principales de servicios para empresas: programación continua y experiencias de identidad.</p>
+          <div class="button-row">
+            <a class="button" href="/contacto">Solicitar propuesta</a>
+            <a class="button button-secondary" href="/artistas">Explorar catálogo</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel-grid" aria-label="Servicios para empresas">
+        <article class="info-panel">
+          <h2>Programación continua</h2>
+          <p>Música en vivo pensada para acompañar el ambiente y mejorar la experiencia del cliente de forma recurrente.</p>
+        </article>
+        <article class="info-panel">
+          <h2>Experiencias de identidad</h2>
+          <p>Shows con mayor desarrollo artístico, diseñados para generar impacto y diferenciación.</p>
+        </article>
+      </section>
+
+      <section class="panel-grid" aria-label="Beneficios">
+        <article class="info-panel">
+          <h3>Experiencia del cliente</h3>
+          <p>Mejora la percepción del espacio y crea una atmósfera más memorable.</p>
+        </article>
+        <article class="info-panel">
+          <h3>Permanencia y fidelización</h3>
+          <p>La música en vivo invita a quedarse, volver y recomendar.</p>
+        </article>
+        <article class="info-panel">
+          <h3>Diferenciación</h3>
+          <p>Construye una propuesta más reconocible frente a la competencia.</p>
+        </article>
+        <article class="info-panel">
+          <h3>Menos incertidumbre</h3>
+          <p>Sophora cura, coordina y acompaña el proceso de contratación.</p>
+        </article>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-brand-row">
+            <img src="/assets/sophora_logo.png" alt="Sophora" />
+            <span>© 2026</span>
+          </div>
+          <p>Experiencias musicales en vivo para eventos, empresas y espacios que buscan una identidad sonora cuidada.</p>
+        </div>
+        <div class="footer-column">
+          <a href="/contacto">Contacto</a>
+          <a href="/preguntas">Preguntas frecuentes</a>
+          <a href="mailto:info@sophora.cl">info@sophora.cl</a>
+          <a href="https://wa.me/56920474645" target="_blank" rel="noreferrer">+56 9 2047 4645</a>
+        </div>
+        <div class="footer-column">
+          <a href="/artistas">Catálogo de artistas</a>
+          <a href="/unirse">Únete a Sophora</a>
+          <a href="/login">Login artistas</a>
+          <a href="/privacidad">Privacidad</a>
+        </div>
       </div>
-      <a class="feature-panel media-panel" href="/artistas" aria-label="Ver catalogo de artistas">
-        <img id="para-gallery-image" src="assets/artist-placeholder.svg" alt="" />
-        <span class="feature-panel-overlay">
-          <span>Catalogo de Artistas</span>
-          <strong>Explorar</strong>
-        </span>
-      </a>
-    </section>
-
-    <section class="service-duo" aria-label="Servicios para empresas">
-      <article>
-        <span>Continuidad</span>
-        <h2>Programación continua</h2>
-        <p>Música en vivo pensada para acompañar el ambiente y mejorar la experiencia del cliente de forma recurrente.</p>
-      </article>
-      <article>
-        <span>Identidad</span>
-        <h2>Experiencias de identidad</h2>
-        <p>Shows con mayor desarrollo artístico, diseñados para generar impacto y diferenciación.</p>
-      </article>
-    </section>
-
-    <section class="benefit-orbit" aria-label="Beneficios para empresas">
-      <article>
-        <span aria-hidden="true">👥</span>
-        <p>Mejora la experiencia del cliente</p>
-      </article>
-      <article>
-        <span aria-hidden="true">💰</span>
-        <p>Aumenta la permanencia y fideliza</p>
-      </article>
-      <article>
-        <span aria-hidden="true">⭐</span>
-        <p>Diferencia tu propuesta frente a la competencia</p>
-      </article>
-      <article>
-        <span aria-hidden="true">🚫</span>
-        <p>Reduce la incertidumbre en la contratación</p>
-      </article>
-    </section>
-  </main>
-
-  <script src="home-web.js" defer></script>
+    </footer>
+  </div>
 </body>
 </html>

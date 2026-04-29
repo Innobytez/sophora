@@ -3,74 +3,129 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sophora</title>
-  <meta name="description" content="Sophora programa experiencias de musica en vivo en Chile." />
+  <title>Sophora | Música en vivo curada</title>
+  <meta name="description" content="Sophora conecta artistas profesionales con eventos especiales, empresas y experiencias musicales en vivo." />
   <link rel="icon" type="image/png" href="assets/sophora_logo_square.png" />
   <link rel="apple-touch-icon" href="assets/sophora_logo_square.png" />
-  <meta property="og:title" content="Sophora" />
-  <meta property="og:description" content="Sophora programa experiencias de musica en vivo en Chile." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://sophora.cl/assets/sophora_logo_square.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Sophora" />
-  <meta name="twitter:description" content="Sophora programa experiencias de musica en vivo en Chile." />
-  <meta name="twitter:image" content="https://sophora.cl/assets/sophora_logo_square.png" />
   <link rel="stylesheet" href="home-web.css" />
 </head>
-<body class="sophora-shell home-page">
-  <main class="site-frame" aria-label="Homepage de Sophora">
-    <header class="site-topbar">
+<body class="home-page">
+  <div class="site-shell">
+    <header class="site-nav">
       <a class="brand-mark" href="/" aria-label="Sophora">
         <img src="assets/sophora_logo.png" alt="Sophora" />
       </a>
-      <address id="contact" class="contact-strip" aria-label="Contactar a Sophora">
-        <a href="mailto:info@sophora.cl">info@sophora.cl</a>
-        <a href="https://wa.me/56920474645" target="_blank" rel="noreferrer" data-whatsapp-contact>
-          <span data-whatsapp-label>+56 9 2047 4645</span>
-        </a>
-        <a href="mailto:info@sophora.cl?subject=Acceso%20de%20artistas">Acceso de artistas</a>
-      </address>
+      <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button><nav class="primary-nav" aria-label="Navegación principal">
+        <a href="/eventos">Eventos Especiales</a>
+        <a href="/empresas">Convenio Empresas</a>
+        <a href="/artistas">Catálogo de Artistas</a>
+        
+        <a href="/unirse">Únete a Sophora</a>
+        <a class="nav-pill" href="/login">Login Artistas</a><a href="/contacto">Contacto</a>
+      </nav>
     </header>
 
-    <section class="hero-grid" aria-label="Introduccion de Sophora">
-      <div class="hero-copy">
-        <p class="eyebrow">Sophora</p>
-        <h1>Articulamos experiencias en vivo que generan valor para empresas, artistas y el ecosistema creativo.</h1>
+    <main class="page-main">
+      <section class="hero-market" aria-label="Catálogo de artistas Sophora">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <h1>¿Qué hacemos?</h1>
+            <p>Articulamos experiencias en vivo que generan valor para empresas, artistas y el ecosistema creativo.</p>
+          </div>
+
+          <div class="hero-media-stack" aria-label="Catálogo de artistas">
+            <span class="hero-slash" aria-hidden="true"></span>
+            <span class="hero-photo-card">
+              <img class="gallery-image gallery-image-current" src="assets/artist-placeholder.svg" alt="" />
+              <img class="gallery-image gallery-image-next" src="assets/artist-placeholder.svg" alt="" aria-hidden="true" />
+              <span class="hero-photo-label">
+                <strong>Catálogo de Artistas</strong>
+                <a href="/artistas">Explorar</a>
+              </span>
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-band" aria-label="Servicios principales">
+        <div class="section-wrap feature-grid">
+          <a class="feature-card" href="/eventos">
+            <img src="artists/carmeners/assets/the-carmeners-jpg.webp" alt="" />
+            <span class="feature-card-copy">
+              <h3>Eventos Especiales</h3>
+              <p>Música en vivo para celebraciones, matrimonios, lanzamientos y encuentros con identidad.</p>
+            </span>
+          </a>
+
+          <a class="feature-card" href="/empresas">
+            <img src="artists/mirza-y-erick/assets/mirza-y-erick-01.jpg" alt="" />
+            <span class="feature-card-copy">
+              <h3>Convenio Empresas</h3>
+              <p>Formatos musicales continuos para hoteles, restaurantes, marcas y espacios culturales.</p>
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <section class="content-band alt" aria-label="Colaboradores">
+        <div class="section-wrap collab-strip">
+          <h2>Colaboradores</h2>
+          <div class="collaborator-marks" aria-label="Colaboradores Sophora">
+            <span class="collaborator-item">
+              <span class="collaborator-circle">Wave</span>
+              <span class="collaborator-name">Wave</span>
+            </span>
+            <span class="collaborator-item">
+              <span class="collaborator-circle collaborator-circle-dark">
+                <img src="assets/innobytez_short_logo.png" alt="" />
+              </span>
+              <span class="collaborator-name">Innobytez</span>
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-band" aria-label="Únete a Sophora">
+        <div class="section-wrap split-panel">
+          <div class="image-slab">
+            <img src="artists/gabriela-caceres/assets/gabriela-caceres-joyitas.jpg" alt="" />
+          </div>
+          <div class="copy-block">
+            <p class="eyebrow">Únete a Sophora</p>
+            <h2>Un espacio para artistas con propuesta, oficio y visión profesional.</h2>
+            <p>Si tienes un proyecto listo para escenarios, programación cultural o experiencias privadas, cuéntanos sobre tu trabajo.</p>
+            <div class="button-row">
+              <a class="button" href="/unirse">Postular a Sophora</a>
+              <a class="button button-secondary" href="/login">Login artistas</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-brand-row">
+            <img src="/assets/sophora_logo.png" alt="Sophora" />
+            <span>© 2026</span>
+          </div>
+          <p>Experiencias musicales en vivo para eventos, empresas y espacios que buscan una identidad sonora cuidada.</p>
+        </div>
+        <div class="footer-column">
+          <a href="/contacto">Contacto</a>
+          <a href="/preguntas">Preguntas frecuentes</a>
+          <a href="mailto:info@sophora.cl">info@sophora.cl</a>
+          <a href="https://wa.me/56920474645" target="_blank" rel="noreferrer">+56 9 2047 4645</a>
+        </div>
+        <div class="footer-column">
+          <a href="/artistas">Catálogo de artistas</a>
+          <a href="/unirse">Únete a Sophora</a>
+          <a href="/login">Login artistas</a>
+          <a href="/privacidad">Privacidad</a>
+        </div>
       </div>
-
-      <a class="feature-panel media-panel" href="/artistas" aria-label="Ver catalogo de artistas">
-        <img id="gallery-image" src="assets/artist-placeholder.svg" alt="" />
-        <span class="feature-panel-overlay">
-          <span>Catalogo de Artistas</span>
-          <strong>Explorar</strong>
-        </span>
-      </a>
-    </section>
-
-    <section class="service-runway" aria-label="Servicios de Sophora">
-      <a class="runway-card runway-card-primary" href="/empresas">
-        <span>01</span>
-        <h2>Convenio empresas</h2>
-        <p>Experiencias musicales para marcas, hoteles y espacios corporativos.</p>
-        <strong>Informacion</strong>
-      </a>
-      <a class="runway-card" href="#contact">
-        <span>02</span>
-        <h2>Eventos y celebraciones</h2>
-        <p>Musica en vivo para celebraciones, bodas y momentos especiales.</p>
-        <strong>Reservar</strong>
-      </a>
-    </section>
-
-    <section class="collaborator-marquee" aria-label="Colaboradores de Sophora">
-      <p>Sophora trabaja de cerca con colaboradores creativos y de produccion para entregar musica en vivo de alta calidad.</p>
-      <div>
-        <span>C1</span>
-        <span>Wave</span>
-        <span>C3</span>
-      </div>
-    </section>
-  </main>
+    </footer>
+  </div>
 
   <script src="home-web.js" defer></script>
 </body>

@@ -35,6 +35,16 @@ app.get("/", (req, res) => sendRootFile(res, "index.html"));
 app.get(/^\/empresas\/?$/, (req, res) => sendRootFile(res, "paraempresas.html"));
 app.get(/^\/convenioempresas\/?$/, (req, res) => res.redirect(301, "/empresas"));
 app.get(/^\/paraempresas\/?$/, (req, res) => res.redirect(301, "/empresas"));
+app.get(/^\/eventos\/?$/, (req, res) => sendRootFile(res, "eventos.html"));
+app.get(/^\/contacto\/?$/, (req, res) => sendRootFile(res, "contacto.html"));
+app.get(/^\/contact\/?$/, (req, res) => res.redirect(301, "/contacto"));
+app.get(/^\/unirse\/?$/, (req, res) => sendRootFile(res, "unirse.html"));
+app.get(/^\/login\/?$/, (req, res) => sendRootFile(res, "login.html"));
+app.get(/^\/perfil\/?$/, (req, res) => sendRootFile(res, "perfil.html"));
+app.get(/^\/admin\/?$/, (req, res) => sendRootFile(res, "admin.html"));
+app.get(/^\/privacidad\/?$/, (req, res) => sendRootFile(res, "privacidad.html"));
+app.get(/^\/privacypolicy\/?$/, (req, res) => res.redirect(301, "/privacidad"));
+app.get(/^\/preguntas\/?$/, (req, res) => sendRootFile(res, "preguntas.html"));
 app.get(/^\/artistas\/?$/, (req, res) => sendRootFile(res, "catalogodeartistas.html"));
 app.get(/^\/catalogodeartistas\/?$/, (req, res) => res.redirect(301, "/artistas"));
 
@@ -58,7 +68,15 @@ app.get(/^\/artists\/([^/]+)\/?$/, (req, res, next) => {
   "artist-catalog.js",
   "catalogodeartistas.html",
   "artist-catalog-page.html",
-  "paraempresas.html"
+  "paraempresas.html",
+  "eventos.html",
+  "contacto.html",
+  "unirse.html",
+  "login.html",
+  "perfil.html",
+  "admin.html",
+  "privacidad.html",
+  "preguntas.html"
 ].forEach((fileName) => {
   app.get(`/${fileName}`, (req, res) => sendRootFile(res, fileName));
 });

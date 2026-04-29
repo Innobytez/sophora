@@ -5,9 +5,14 @@ const galleryItems = [
   "assets/artist-placeholder.svg"
 ];
 
-const image = document.getElementById("gallery-image") || document.getElementById("para-gallery-image");
+const galleryCard = document.querySelector(".hero-photo-card");
+const currentImage = document.querySelector(".gallery-image-current");
+const nextImage = document.querySelector(".gallery-image-next");
+const legacyImage = document.getElementById("gallery-image") || document.getElementById("para-gallery-image");
 const whatsappContact = document.querySelector("[data-whatsapp-contact]");
 const whatsappLabel = document.querySelector("[data-whatsapp-label]");
+const siteNav = document.querySelector(".site-nav");
+const menuToggle = document.querySelector(".menu-toggle");
 
 function hydrateWhatsappContact() {
   if (!whatsappContact) return;
@@ -21,19 +26,63 @@ function hydrateWhatsappContact() {
 }
 
 function startGallery() {
-  if (!image || !galleryItems.length) return;
+  if (galleryCard && currentImage && nextImage && galleryItems.length) {
+    let activeIndex = 0;
+    let visibleImage = currentImage;
+    let hiddenImage = nextImage;
+
+    visibleImage.src = galleryItems[activeIndex];
+    visibleImage.classList.add("is-active");
+
+    window.setInterval(() => {
+      const nextIndex = (activeIndex + 1) % galleryItems.length;
+      const revealLoadedImage = () => {
+        hiddenImage.classList.add("is-active");
+        visibleImage.classList.remove("is-active");
+
+        const previousVisibleImage = visibleImage;
+        visibleImage = hiddenImage;
+        hiddenImage = previousVisibleImage;
+        activeIndex = nextIndex;
+      };
+
+      hiddenImage.addEventListener("load", revealLoadedImage, { once: true });
+      hiddenImage.src = galleryItems[nextIndex];
+      if (hiddenImage.complete) {
+        hiddenImage.removeEventListener("load", revealLoadedImage);
+        revealLoadedImage();
+      }
+    }, 3600);
+    return;
+  }
+
+  if (!legacyImage || !galleryItems.length) return;
   let activeIndex = 0;
-  image.src = galleryItems[activeIndex];
+  legacyImage.src = galleryItems[activeIndex];
 
   window.setInterval(() => {
     activeIndex = (activeIndex + 1) % galleryItems.length;
-    image.style.opacity = "0";
-    window.setTimeout(() => {
-      image.src = galleryItems[activeIndex];
-      image.style.opacity = "1";
-    }, 260);
+    legacyImage.src = galleryItems[activeIndex];
   }, 3600);
 }
 
+function hydrateMenuToggle() {
+  if (!siteNav || !menuToggle) return;
+  menuToggle.addEventListener("click", () => {
+    const isOpen = siteNav.classList.toggle("is-open");
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
+  });
+
+  siteNav.querySelectorAll(".primary-nav a").forEach((link) => {
+    link.addEventListener("click", () => {
+      siteNav.classList.remove("is-open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Abrir menú");
+    });
+  });
+}
+
 hydrateWhatsappContact();
+hydrateMenuToggle();
 startGallery();

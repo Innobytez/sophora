@@ -68,6 +68,13 @@ const PUBLIC_ROOT_FILES = [
   "paraempresas.html",
   "catalogodeartistas.html",
   "artist-catalog-page.html",
+  "eventos.html",
+  "contacto.html",
+  "unirse.html",
+  "login.html",
+  "perfil.html",
+  "privacidad.html",
+  "preguntas.html",
   "artists.html",
   "booking.html",
   "auth.html",
@@ -3327,6 +3334,70 @@ app.get("/empresas", (req, res) => {
 
 app.get("/empresas/", (req, res) => {
   res.sendFile(path.join(config.rootDir, "paraempresas.html"));
+});
+
+app.get("/eventos", (req, res) => {
+  res.sendFile(path.join(config.rootDir, "eventos.html"));
+});
+
+app.get("/eventos/", (req, res) => {
+  res.sendFile(path.join(config.rootDir, "eventos.html"));
+});
+
+app.get("/contact", (req, res) => {
+  res.redirect(301, "/contacto");
+});
+
+app.get("/contacto", (req, res) => {
+  res.sendFile(path.join(config.rootDir, "contacto.html"));
+});
+
+app.get("/contacto/", (req, res) => {
+  res.sendFile(path.join(config.rootDir, "contacto.html"));
+});
+
+app.get("/unirse", (req, res) => {
+  res.sendFile(path.join(config.rootDir, "unirse.html"));
+});
+
+app.get("/unirse/", (req, res) => {
+  res.sendFile(path.join(config.rootDir, "unirse.html"));
+});
+
+app.get("/login", (req, res) => {
+  res.sendFile(path.join(config.rootDir, "login.html"));
+});
+
+app.get("/login/", (req, res) => {
+  res.sendFile(path.join(config.rootDir, "login.html"));
+});
+
+app.get("/perfil", (req, res) => {
+  res.sendFile(path.join(config.rootDir, "perfil.html"));
+});
+
+app.get("/perfil/", (req, res) => {
+  res.sendFile(path.join(config.rootDir, "perfil.html"));
+});
+
+app.get("/privacypolicy", (req, res) => {
+  res.redirect(301, "/privacidad");
+});
+
+app.get("/privacidad", (req, res) => {
+  res.sendFile(path.join(config.rootDir, "privacidad.html"));
+});
+
+app.get("/privacidad/", (req, res) => {
+  res.sendFile(path.join(config.rootDir, "privacidad.html"));
+});
+
+app.get("/preguntas", (req, res) => {
+  res.sendFile(path.join(config.rootDir, "preguntas.html"));
+});
+
+app.get("/preguntas/", (req, res) => {
+  res.sendFile(path.join(config.rootDir, "preguntas.html"));
 });
 
 app.get("/catalogodeartistas", (req, res) => {
