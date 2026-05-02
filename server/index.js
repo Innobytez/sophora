@@ -70,6 +70,7 @@ const PUBLIC_ROOT_FILES = [
   "artist-catalog-page.html",
   "eventos.html",
   "contacto.html",
+  "escribenos.html",
   "unirse.html",
   "login.html",
   "perfil.html",
@@ -3354,6 +3355,14 @@ app.get("/contacto", (req, res) => {
 
 app.get("/contacto/", (req, res) => {
   res.sendFile(path.join(config.rootDir, "contacto.html"));
+});
+
+app.get("/escribenos", (req, res) => {
+  res.sendFile(path.join(config.rootDir, "escribenos.html"));
+});
+
+app.get("/escribenos/", (req, res) => {
+  res.sendFile(path.join(config.rootDir, "escribenos.html"));
 });
 
 app.get("/unirse", (req, res) => {

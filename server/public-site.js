@@ -38,6 +38,7 @@ app.get(/^\/paraempresas\/?$/, (req, res) => res.redirect(301, "/empresas"));
 app.get(/^\/eventos\/?$/, (req, res) => sendRootFile(res, "eventos.html"));
 app.get(/^\/contacto\/?$/, (req, res) => sendRootFile(res, "contacto.html"));
 app.get(/^\/contact\/?$/, (req, res) => res.redirect(301, "/contacto"));
+app.get(/^\/escribenos\/?$/, (req, res) => sendRootFile(res, "escribenos.html"));
 app.get(/^\/unirse\/?$/, (req, res) => sendRootFile(res, "unirse.html"));
 app.get(/^\/login\/?$/, (req, res) => sendRootFile(res, "login.html"));
 app.get(/^\/perfil\/?$/, (req, res) => sendRootFile(res, "perfil.html"));
@@ -71,6 +72,7 @@ app.get(/^\/artists\/([^/]+)\/?$/, (req, res, next) => {
   "paraempresas.html",
   "eventos.html",
   "contacto.html",
+  "escribenos.html",
   "unirse.html",
   "login.html",
   "perfil.html",

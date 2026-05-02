@@ -1,8 +1,5 @@
 const galleryItems = [
-  "artists/carmeners/assets/the-carmeners-jpg.webp",
-  "artists/carmeners/assets/the-carmeners-logo.jpeg",
-  "artists/alexander-roberts/assets/alexander-roberts-casual-headshot.jpg",
-  "assets/artist-placeholder.svg"
+  "/assets/services/teatro-butacas-rojas.png"
 ];
 
 const galleryCard = document.querySelector(".hero-photo-card");

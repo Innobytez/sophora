@@ -69,7 +69,7 @@ window.SOPHORA_ARTISTS = [
   {
     slug: "la-sociedad-chilena-del-jass",
     name: "La Sociedad Chilena del Jass",
-    tagline: "Jass chileno con presencia escenica, identidad patrimonial y formato para escenarios culturales.",
+    tagline: "Jazz chileno con presencia escenica, identidad patrimonial y formato para escenarios culturales.",
     image: "/artists/la-sociedad-chilena-del-jass/assets/la-sociedad-chilena-del-jass-card.png",
     audio: "",
     previewVideo: "",

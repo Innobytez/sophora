@@ -3,14 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Artista | Sophora</title>
-  <meta name="description" content="Página de artista Sophora con fotos, audio y material de presentación." />
+  <title>Escríbenos | Sophora</title>
+  <meta name="description" content="Cotiza una experiencia musical en vivo con Sophora." />
   <link rel="icon" type="image/png" href="/assets/sophora_logo_square.png" />
-  <link rel="apple-touch-icon" href="/assets/sophora_logo_square.png" />
   <link rel="stylesheet" href="/home-web.css" />
-  <link rel="stylesheet" href="/artist-catalog.css" />
 </head>
-<body data-catalog-mode="detail">
+<body>
   <div class="site-shell">
     <header class="site-nav">
       <a class="brand-mark" href="/" aria-label="Sophora">
@@ -27,7 +25,30 @@
       </nav>
     </header>
 
-    <main class="page-main artist-detail-page" id="artist-detail-page" aria-label="Página de artista"></main>
+    <main class="page-main">
+      <section class="page-hero">
+        <div class="page-hero-inner">
+          <p class="eyebrow">Cotizar experiencia</p>
+          <h1>Diseñemos una experiencia musical para tu espacio.</h1>
+          <p>Cuéntanos fecha, lugar, tipo de evento, público esperado y el ambiente musical que quieres crear.</p>
+        </div>
+      </section>
+      <section class="panel-grid">
+        <article class="info-panel">
+          <h2>Contacto directo</h2>
+          <p><a href="mailto:info@sophora.cl">info@sophora.cl</a></p>
+          <p><a href="https://wa.me/56920474645" target="_blank" rel="noreferrer">+56 9 2047 4645</a></p>
+        </article>
+        <form class="info-panel form-card" action="mailto:info@sophora.cl" method="post" enctype="text/plain">
+          <label>Nombre <input name="nombre" autocomplete="name" /></label>
+          <label>Email <input name="email" type="email" autocomplete="email" /></label>
+          <label>Tipo de experiencia <input name="tipo_de_experiencia" /></label>
+          <label>Mensaje <textarea name="mensaje"></textarea></label>
+          <button class="button" type="submit">Enviar</button>
+        </form>
+      </section>
+    </main>
+
     <footer class="site-footer">
       <div class="footer-inner">
         <div class="footer-brand">
@@ -52,9 +73,6 @@
       </div>
     </footer>
   </div>
-
-  <script src="/artist-catalog-data.js"></script>
-  <script src="/artist-catalog.js"></script>
   <script src="/home-web.js" defer></script>
 </body>
 </html>
