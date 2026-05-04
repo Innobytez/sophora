@@ -99,7 +99,10 @@ const PUBLIC_ROOT_FILES = [
   "artist-page.js",
   "auth.js",
   "admin.js",
-  "dashboard.js"
+  "dashboard.js",
+  "dossier.html",
+  "dossier.css",
+  "dossier.js"
 ];
 
 const CATALOG_ARTIST_SLUGS = new Set([
@@ -3423,6 +3426,14 @@ app.get("/artistas", (req, res) => {
 
 app.get("/artistas/", (req, res) => {
   res.sendFile(path.join(config.rootDir, "catalogodeartistas.html"));
+});
+
+app.get("/dossier", (req, res) => {
+  res.sendFile(path.join(config.rootDir, "dossier.html"));
+});
+
+app.get("/dossier/", (req, res) => {
+  res.sendFile(path.join(config.rootDir, "dossier.html"));
 });
 
 app.get("/artistas/:slug/", (req, res, next) => {

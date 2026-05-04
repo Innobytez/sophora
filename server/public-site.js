@@ -48,6 +48,7 @@ app.get(/^\/privacypolicy\/?$/, (req, res) => res.redirect(301, "/privacidad"));
 app.get(/^\/preguntas\/?$/, (req, res) => sendRootFile(res, "preguntas.html"));
 app.get(/^\/artistas\/?$/, (req, res) => sendRootFile(res, "catalogodeartistas.html"));
 app.get(/^\/catalogodeartistas\/?$/, (req, res) => res.redirect(301, "/artistas"));
+app.get(/^\/dossier\/?$/, (req, res) => sendRootFile(res, "dossier.html"));
 
 app.get(/^\/artistas\/([^/]+)\/?$/, (req, res, next) => {
   const slug = req.params[0];
@@ -78,7 +79,10 @@ app.get(/^\/artists\/([^/]+)\/?$/, (req, res, next) => {
   "perfil.html",
   "admin.html",
   "privacidad.html",
-  "preguntas.html"
+  "preguntas.html",
+  "dossier.html",
+  "dossier.css",
+  "dossier.js"
 ].forEach((fileName) => {
   app.get(`/${fileName}`, (req, res) => sendRootFile(res, fileName));
 });
