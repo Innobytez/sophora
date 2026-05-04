@@ -103,7 +103,7 @@
       page.innerHTML = `
         <section class="catalog-hero">
           <a class="catalog-logo-link" href="/" aria-label="Volver a Sophora">
-            <img src="/assets/sophora_logo.png" alt="Sophora" />
+            <img src="/assets/sophora_logo_black.png" alt="Sophora" />
           </a>
           <p>Artista no encontrado.</p>
           <nav class="catalog-actions">
@@ -123,7 +123,7 @@
       <header class="artist-detail-hero">
         <div class="artist-detail-copy">
           <a class="catalog-logo-link" href="/" aria-label="Volver a Sophora">
-            <img src="/assets/sophora_logo.png" alt="Sophora" />
+            <img src="/assets/sophora_logo_black.png" alt="Sophora" />
           </a>
           <nav class="catalog-actions" aria-label="Acciones de artista">
             <a href="mailto:info@sophora.cl?subject=${encodeURIComponent(artist.name)}">info@sophora.cl</a>

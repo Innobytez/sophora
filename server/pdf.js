@@ -23,7 +23,7 @@ const HEADER_HEIGHT = 92;
 const HEADER_CONTENT_TOP = HEADER_HEIGHT + 18;
 const FOOTER_HEIGHT = 28;
 const CARD_GAP = 10;
-const LOGO_PATH = path.join(config.rootDir, "assets", "sophora_logo.png");
+const LOGO_PATH = path.join(config.rootDir, "assets", "sophora_logo_black.png");
 
 function artistDisplayName(artist) {
   return artist?.displayName?.es

@@ -3,6 +3,7 @@ data/
 uploads/
 .env
 .env.local
+.DS_Store
 *.log
 backups/
 artists/mirza-y-erick/assets/mirza-y-erick-stand-by-me.mp4
