@@ -80,9 +80,7 @@ app.get(/^\/artists\/([^/]+)\/?$/, (req, res, next) => {
   "admin.html",
   "privacidad.html",
   "preguntas.html",
-  "dossier.html",
-  "dossier.css",
-  "dossier.js"
+  "dossier.html"
 ].forEach((fileName) => {
   app.get(`/${fileName}`, (req, res) => sendRootFile(res, fileName));
 });

@@ -100,9 +100,7 @@ const PUBLIC_ROOT_FILES = [
   "auth.js",
   "admin.js",
   "dashboard.js",
-  "dossier.html",
-  "dossier.css",
-  "dossier.js"
+  "dossier.html"
 ];
 
 const CATALOG_ARTIST_SLUGS = new Set([

@@ -10,7 +10,7 @@
     "start": "node server/public-site.js",
     "start:backend": "node server/index.js",
     "dev": "node --watch server/index.js",
-    "check": "node --check server/index.js && node --check server/database-postgres.js && node --check server/storage.js && node --check dashboard.js && node --check dossier.js",
+    "check": "node --check server/index.js && node --check server/database-postgres.js && node --check server/storage.js && node --check dashboard.js && node --check assets/dossier-2026.js",
     "services:up": "docker compose up -d postgres minio",
     "services:down": "docker compose down",
     "services:logs": "docker compose logs -f postgres minio",

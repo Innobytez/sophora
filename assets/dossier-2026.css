@@ -33,18 +33,19 @@ body {
   user-select: none;
 }
 
-.dossier-canvas {
+.dossier-slide {
   display: block;
-  max-width: 100vw;
-  max-height: 100vh;
-  max-height: 100dvh;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  object-fit: contain;
   background: #000;
   opacity: 1;
   transition: opacity 360ms ease;
 }
 
-.dossier-stage.is-loading .dossier-canvas,
-.dossier-stage.is-fading .dossier-canvas {
+.dossier-stage.is-loading .dossier-slide,
+.dossier-stage.is-fading .dossier-slide {
   opacity: 0;
 }
 
