@@ -7,3 +7,6 @@ uploads/
 *.log
 backups/
 artists/mirza-y-erick/assets/mirza-y-erick-stand-by-me.mp4
+
+# Local Playwright output
+test-results/
