@@ -1,6 +1,6 @@
 import * as pdfjsLib from "https://cdn.jsdelivr.net/npm/pdfjs-dist@5.7.284/build/pdf.mjs";
 
-const PDF_URL = "/assets/SophoraDossier.pdf";
+const PDF_URL = "/assets/DossierSophora2026.pdf";
 const PDF_WORKER_URL = "https://cdn.jsdelivr.net/npm/pdfjs-dist@5.7.284/build/pdf.worker.mjs";
 const SLIDE_DURATION_MS = 8500;
 const FADE_DURATION_MS = 180;
